@@ -1,0 +1,13 @@
+{
+  "crossMethod": "uniform",
+  "mutationMethod": "uniformMultiGene",
+  "selectionMethod": {
+    "method": "elite",
+    "quantity": 30
+  },
+  "implementationStrategy": "fillAll",
+  "stopCriterion": {
+    "criterion": "time",
+    "value": 60
+  }
+}

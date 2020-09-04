@@ -10,7 +10,8 @@ window.onload = () => {
 
   if (configUploader) {
     configUploader.onchange = async (event: any) => {
-      // const config: Configuration = await Configuration.fromFile(event.target.files[0]);
+      const config: Configuration = await Configuration.fromFile(event.target.files[0]);
+      console.log(config);
  
       let allItems: AllItems = { helmets: [], weapons: [], boots: [], gloves: [], breastplates: []};
       if (loadingMessage) loadingMessage.innerHTML = 'Loading weapons...';

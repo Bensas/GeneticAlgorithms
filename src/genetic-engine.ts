@@ -8,10 +8,10 @@ export class GeneticEngine {
   stopCriterion: (population: Character[]) => boolean;
 
   constructor(configuration: Configuration) {
-    this.cross = configuration.crossMethod;
-    this.mutate = configuration.mutationMethod;
-    this.select = configuration.selectionMethod;
-    this.stopCriterion = configuration.stopCriterion;
+    // this.cross = configuration.crossMethod;
+    // this.mutate = configuration.mutationMethod;
+    // this.select = configuration.selectionMethod;
+    // this.stopCriterion = configuration.stopCriterion;
   }
 
   startEvolution(canvas: HTMLCanvasElement){

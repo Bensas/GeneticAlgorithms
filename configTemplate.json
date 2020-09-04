@@ -1,0 +1,13 @@
+{
+  "crossMethod": "uniform", //onePoint | twoPoint | anular | uniform
+  "mutationMethod": "uniformMultiGene",//gene | limitedMultiGene | uniformMultiGene | complete
+  "selectionMethod": {
+    "method": "elite", //elite | roulette | universal | boltzmann | tournamentDeterministic | tournamentProbabilistic | ranking
+    "quantity": 30
+  },
+  "implementationStrategy": "fillAll",
+  "stopCriterion": {
+    "criterion": "time", //time | generationCount | aptitude | structure | content
+    "value": 60
+  } // fillAll | fillParent
+}

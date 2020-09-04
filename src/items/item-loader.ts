@@ -3,17 +3,9 @@ import { Item } from './item';
 const d3 = require('d3');
 
 export class ItemLoader {
-  loadItemsFromTsv(filename: string): AllItems {
-    let result: AllItems = {
-      helmets: [],
-      weapons: [],
-      boots: [],
-      gloves: [],
-      chestPlates: []
-    };
-    d3.tsv('./datasets/armasReduced.tsv', function(data: any) {
-      console.log(result.weapons);
-      result.weapons.push(<Item>{
+  static async loadItemsFromTsv(filename: string, items: Item[]) {
+    await d3.tsv('./datasets/' + filename, function(data: any) {
+      items.push(<Item>{
         id: data['id'],
         strength: data['Fu'],
         agility: data['Ag'],
@@ -22,6 +14,5 @@ export class ItemLoader {
         health: data['Vi']
       })
     });
-    return result;
   }
 }

@@ -5,5 +5,5 @@ export interface AllItems {
   weapons: Item[],
   boots: Item[],
   gloves: Item[],
-  chestPlates: Item[]
+  breastplates: Item[]
 }

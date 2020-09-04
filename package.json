@@ -6,7 +6,7 @@
   "scripts": {
     "start": "tsc && cp -r ./src/web_files ./dist && node ./dist/index.js",
     "build": "webpack",
-    "serve": "webpack-dev-server",
+    "serve": "webpack-dev-server & webpack --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

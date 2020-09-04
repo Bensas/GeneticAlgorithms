@@ -22,6 +22,7 @@ export class Configuration {
       reader.onload = function(event) {
         const fileContents = event.target?.result;
         const configObj = JSON.parse(<string>fileContents);
+        console.log(configObj);
         resolve(Configuration.fromConfigObject(configObj));
       }
       reader.readAsText(file);
@@ -47,25 +48,25 @@ export class Configuration {
         console.log('No mutation method provided, deaulting to uniformMultiGene.');
         result.mutationMethod = uniformMultiGeneMutate;
     }
-
-    switch (configObj.selectionMethod) {
-      case 'elite':
-        result.selectionMethod = eliteSelect;
-        break;
-      default:
-        console.log('No selection method provided, deaulting to elite.');
-        result.selectionMethod = eliteSelect;
-    }
-
-    switch (configObj.stopCriterion) {
-      case 'time':
-        result.stopCriterion = timeCriterion;
-        break;
-      default:
-        console.log('No stop criterion provided, deaulting to time.');
-        result.stopCriterion = timeCriterion;
-    }
     
+    if (configObj.selectionMethod)
+      switch (configObj.selectionMethod.method) {
+        case 'elite':
+          result.selectionMethod = eliteSelect;
+          break;
+        default:
+          console.log('No selection method provided, deaulting to elite.');
+          result.selectionMethod = eliteSelect;
+      }
+    if (configObj.stopCriterion)
+      switch (configObj.stopCriterion.criterion) {
+        case 'time':
+          result.stopCriterion = timeCriterion;
+          break;
+        default:
+          console.log('No stop criterion provided, deaulting to time.');
+          result.stopCriterion = timeCriterion;
+      }
     return result;
   }
 }

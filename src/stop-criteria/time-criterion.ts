@@ -1,6 +1,6 @@
 import { Character} from "../character";
 
-export function timeCriterion(spopulation: Character[], seconds: number): boolean {
+export function timeCriterion(spopulation: Character[]): boolean {
 //   if(!timeCriterion.elapsedTime) {
 //       foo.counter = 0;
 //   }

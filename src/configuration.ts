@@ -7,11 +7,12 @@ import { timeCriterion } from "./stop-criteria/time-criterion";
 const d3 = require('d3');
 
 export class Configuration {
-  crossMethod: (c1: Character, c2: Character) => Character[];
-  mutationMethod: (c: Character) => Character;
-  selectionMethod: (population: Character[], quantity: number) => Character[];
-  implementationStrategy: (population: Character[]) => Character[];
-  stopCriterion: (population: Character[], value: number) => boolean;
+  select: (population: Character[], quantity: number) => Character[];
+  selectQuantity: number;
+  cross: (c1: Character, c2: Character) => Character[];
+  mutate: (c: Character) => Character;
+  replace: (population: Character[], quantity: number) => Character[];
+  stopCriterion: (population: Character[]) => boolean;
   equipment: AllItems;
 
   constructor(){ }
@@ -33,30 +34,30 @@ export class Configuration {
     let result: Configuration = new Configuration()
     switch (configObj.crossMethod) {
       case 'uniform':
-        result.crossMethod = uniformCross;
+        result.cross = uniformCross;
         break;
       default:
         console.log('No cross method provided, deaulting to uniform.');
-        result.crossMethod = uniformCross;
+        result.cross = uniformCross;
     }
 
     switch (configObj.mutationMethod) {
       case 'uniformMultiGene':
-        result.mutationMethod = uniformMultiGeneMutate;
+        result.mutate = uniformMultiGeneMutate;
         break;
       default:
         console.log('No mutation method provided, deaulting to uniformMultiGene.');
-        result.mutationMethod = uniformMultiGeneMutate;
+        result.mutate = uniformMultiGeneMutate;
     }
     
     if (configObj.selectionMethod)
       switch (configObj.selectionMethod.method) {
         case 'elite':
-          result.selectionMethod = eliteSelect;
+          result.select = eliteSelect;
           break;
         default:
           console.log('No selection method provided, deaulting to elite.');
-          result.selectionMethod = eliteSelect;
+          result.select = eliteSelect;
       }
     if (configObj.stopCriterion)
       switch (configObj.stopCriterion.criterion) {

@@ -15,15 +15,15 @@ window.onload = () => {
  
       let allItems: AllItems = { helmets: [], weapons: [], boots: [], gloves: [], breastplates: []};
       if (loadingMessage) loadingMessage.innerHTML = 'Loading weapons...';
-      await ItemLoader.loadItemsFromTsv('armas.tsv', allItems.weapons);
+      await ItemLoader.loadItemsFromTsv('armasReduced.tsv', allItems.weapons);
       if (loadingMessage) loadingMessage.innerHTML = 'Loading boots...';
-      await ItemLoader.loadItemsFromTsv('botas.tsv', allItems.boots);
+      await ItemLoader.loadItemsFromTsv('botasReduced.tsv', allItems.boots);
       if (loadingMessage) loadingMessage.innerHTML = 'Loading helmets...';
-      await ItemLoader.loadItemsFromTsv('cascos.tsv', allItems.helmets);
+      await ItemLoader.loadItemsFromTsv('cascosReduced.tsv', allItems.helmets);
       if (loadingMessage) loadingMessage.innerHTML = 'Loading gloves...';
-      await ItemLoader.loadItemsFromTsv('guantes.tsv', allItems.gloves);
+      await ItemLoader.loadItemsFromTsv('guantesReduced.tsv', allItems.gloves);
       if (loadingMessage) loadingMessage.innerHTML = 'Loading breastplates...';
-      await ItemLoader.loadItemsFromTsv('pecheras.tsv', allItems.breastplates);
+      await ItemLoader.loadItemsFromTsv('pecherasReduced.tsv', allItems.breastplates);
       if (loadingMessage) loadingMessage.innerHTML = 'All Items loaded :)';
       console.log(allItems);
 

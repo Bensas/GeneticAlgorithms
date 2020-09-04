@@ -1,5 +1,6 @@
 import { Character } from "./character";
 import { Configuration } from "./configuration";
+import { Item } from "./items/item";
 
 export class GeneticEngine {
   cross: (population: Character[]) => Character[];
@@ -27,6 +28,14 @@ export class GeneticEngine {
 
   generateRandomPopulation(): Character[]{
     return []
+  }
+
+  grabRandomItems() {
+
+  }
+
+  randomValue(lista: Item[]){
+    
   }
 
   // crossCharacters(population: Character[]){

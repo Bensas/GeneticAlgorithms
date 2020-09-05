@@ -6,9 +6,12 @@ import { eliteSelect } from "./selection-methods/elite-select";
 import { timeCriterion } from "./stop-criteria/time-criterion";
 import { DEFAULT_STARTING_POPULATION, DEFAULT_SELECT_QUANTITY, DEFAULT_MUTATION_CHANCE } from "./defaults";
 import { GeneticEngine } from "./genetic-engine";
+import { CharacterClass, Warrior } from "./character-classes/character-class";
 const d3 = require('d3');
 
 export class Configuration {
+
+  selectedCharacterClass: CharacterClass;
 
   startingPopulation: number;
 
@@ -24,7 +27,9 @@ export class Configuration {
 
   equipment: AllItems;
 
-  constructor(){ }
+  constructor(){ 
+    this.selectedCharacterClass = new Warrior();
+  }
 
   static async fromFile(file: any): Promise<Configuration> {
     return new Promise<Configuration>((resolve, reject)=> {

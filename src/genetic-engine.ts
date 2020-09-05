@@ -1,4 +1,4 @@
-import { Character } from "./character";
+import { Character, HELMET, BOOTS, GLOVES, BREASTPLATE, WEAPON } from "./character";
 import { Configuration } from "./configuration";
 import { Item } from "./items/item";
 import { AllItems } from "./items/all-items";
@@ -20,12 +20,12 @@ export class GeneticEngine {
       let children = this.cross(parents);
       children = this.mutate(children);
       population = this.config.replace(population.concat(children), this.config.selectQuantity);
+      console.log(population);
       this.calculateMetrics(population);
     }
   }
 
   initMetrics(population: Character[]): void {
-    console.log(population);
     this.metrics = {
       averageFitness: this.averageFitness(population),
       minFitness: this.minFitness(population),
@@ -45,33 +45,61 @@ export class GeneticEngine {
     var tamPoblacionInicial: number = startingPopulation;
     let poblacion: Character[] = [];
     for(let i = 0; i < tamPoblacionInicial; i++){
-      let newChar = new Character();
-      newChar.genes.forEach((value, key) => {
-        if (typeof value !== 'number'){
-          if(key === 'helmet')
-            newChar.genes.set(key, this.randomItem(this.allItems.helmets));
-          else if(key === 'boots')
-            newChar.genes.set(key, this.randomItem(this.allItems.boots));
-          else if(key === 'gloves')
-            newChar.genes.set(key, this.randomItem(this.allItems.gloves));
-          else if(key === 'breastplate')
-            newChar.genes.set(key, this.randomItem(this.allItems.breastplates));
-          else if(key === 'weapon')
-            newChar.genes.set(key, this.randomItem(this.allItems.weapons));
-        }
-        else{
-          newChar.genes.set(key, Math.floor(Math.random()*(20 - 13) + 13) / 10);
-        }
-        poblacion.push(newChar);
-      });
+      poblacion.push(this.freshCharacter());
     }
     return poblacion;
   }
 
-  randomItem(lista: Item[]): Item{
-    var item: Item = lista[Math.floor(Math.random()*lista.length)];
+  freshCharacter(): Character {
+    let newChar = new Character();
+    newChar.class = this.config.selectedCharacterClass;
+    newChar.genes.forEach((value, key) => {
+      if (typeof value !== 'number'){
+        if(key === 'helmet')
+          newChar.genes.set(key, this.randomItem(key));
+        else if(key === 'boots')
+          newChar.genes.set(key, this.randomItem(key));
+        else if(key === 'gloves')
+          newChar.genes.set(key, this.randomItem(key));
+        else if(key === 'breastplate')
+          newChar.genes.set(key, this.randomItem(key));
+        else if(key === 'weapon')
+          newChar.genes.set(key, this.randomItem(key));
+      }
+      else{
+        newChar.genes.set(key, Math.floor(Math.random()*(20 - 13) + 13) / 10);
+      }
+    });
+    return newChar;
+  }
+
+  randomItem(itemType: String): Item {
+    let item: Item = <Item>{ };
+    switch(itemType){
+      case HELMET: {
+        item = this.allItems.helmets[Math.floor(Math.random()*this.allItems.helmets.length)];
+        break;
+      }
+      case BOOTS: {
+        item = this.allItems.boots[Math.floor(Math.random()*this.allItems.boots.length)];
+        break;
+      }
+      case GLOVES: {
+        item = this.allItems.gloves[Math.floor(Math.random()*this.allItems.gloves.length)];
+        break;
+      }
+      case BREASTPLATE: {
+        item = this.allItems.breastplates[Math.floor(Math.random()*this.allItems.breastplates.length)];
+        break;
+      }
+      case WEAPON: {
+        item = this.allItems.weapons[Math.floor(Math.random()*this.allItems.weapons.length)];
+        break;
+      }
+    }
     return item;
   }
+
 
   cross(population: Character[]): Character[] {
     let result: Character[] = [];

@@ -2,12 +2,12 @@ import { CharacterClass } from "./character-classes/character-class";
 import { Item } from "./items/item";
 import { isNumber } from "util";
 
-const HEIGHT = 'height';
-const HELMET = 'helmet';
-const WEAPON = 'weapon';
-const BOOTS = 'boots';
-const GLOVES = 'gloves';
-const BREASTPLATE = 'breastplate';
+export const HEIGHT = 'height';
+export const HELMET = 'helmet';
+export const WEAPON = 'weapon';
+export const BOOTS = 'boots';
+export const GLOVES = 'gloves';
+export const BREASTPLATE = 'breastplate';
 
 export const MIN_HEIGHT = 1.3;
 export const MAX_HEIGHT = 2.0;

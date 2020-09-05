@@ -40,16 +40,36 @@ export class GeneticEngine {
     //console.log(this.metrics);
   }
 
-  generateRandomPopulation(quantity: number): Character[]{
-    return []
+  generateRandomPopulation(startingPopulation: number): Character[]{
+    var tamPoblacionInicial: number = startingPopulation;
+    let poblacion: Character[] = [];
+    for(let i = 0; i < tamPoblacionInicial; i++){
+      let newChar = new Character();
+      newChar.genes.forEach((value, key) => {
+        if (typeof value !== 'number'){
+          if(key === 'helmet')
+            (<Item>value) = this.randomItem(this.allItems.helmets);
+          else if(key === 'boots')
+            (<Item>value) = this.randomItem(this.allItems.boots);
+          else if(key === 'gloves')
+            (<Item>value) = this.randomItem(this.allItems.gloves);
+          else if(key === 'breastplate')
+            (<Item>value) = this.randomItem(this.allItems.breastplates);
+          else if(key === 'weapon')
+            (<Item>value) = this.randomItem(this.allItems.weapons);
+        }
+        else{
+          (<Number>value) = Math.floor(Math.random()*(20 - 13) + 13) / 10;
+        }
+        poblacion.push(newChar);
+      });
+    }
+    return poblacion;
   }
 
-  grabRandomItems() {
-
-  }
-
-  randomValue(lista: Item[]){
-    
+  randomItem(lista: Item[]): Item{
+    var item: Item = lista[Math.floor(Math.random()*lista.length)];
+    return item;
   }
 
   cross(population: Character[]): Character[] {

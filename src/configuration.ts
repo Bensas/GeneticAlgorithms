@@ -18,7 +18,7 @@ export class Configuration {
   select: (population: Character[], quantity: number) => Character[];
   selectQuantity: number;
   cross: (c1: Character, c2: Character) => Character[];
-  mutate: (c: Character, mutationChance: number) => Character;
+  mutate: (c: Character, mutationChance: number, geneticEngine: GeneticEngine) => Character;
   mutationChance: number;
   replace: (population: Character[], quantity: number) => Character[];
 

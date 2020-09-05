@@ -13,9 +13,10 @@ export class GeneticEngine {
   startEvolution(canvas: HTMLElement | null){
     let population = this.generateRandomPopulation(this.config.startingPopulation);
     this.initMetrics(population);
-    console.log('Random Population:')
+    console.log('Random Population:');
     console.log(population);
-    while(this.config.stopCriterion(this)){
+    console.log(this.config.stopCriterion(this));
+    while(!this.config.stopCriterion(this)){
       let parents = this.config.select(population, this.config.selectQuantity);
       let children = this.cross(parents);
       children = this.mutate(children);
@@ -110,7 +111,7 @@ export class GeneticEngine {
   }
 
   mutate(population: Character[]): Character[] {
-    return population.map((character: Character) => this.config.mutate(character, this.config.mutationChance));
+    return population.map((character: Character) => this.config.mutate(character, this.config.mutationChance, this));
   }
 
   averageFitness(population: Character[]): number {

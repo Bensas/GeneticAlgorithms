@@ -31,7 +31,8 @@ export class GeneticEngine {
       averageFitness: this.averageFitness(population),
       minFitness: this.minFitness(population),
       startTime: new Date().getTime(),
-      historicalMaxFitness: [this.maxFitness(population)]
+      historicalMaxFitness: [this.maxFitness(population)],
+      generationNumber: 0
     };
   }
 
@@ -39,6 +40,7 @@ export class GeneticEngine {
     this.metrics.averageFitness = this.averageFitness(population);
     this.metrics.minFitness = this.minFitness(population);
     this.metrics.historicalMaxFitness.push(this.maxFitness(population));
+    this.metrics.generationNumber++;
     //console.log(this.metrics);
   }
 

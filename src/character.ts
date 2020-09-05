@@ -19,6 +19,12 @@ export class Character {
   // constructor(charClass?: CharacterClass, charGenes?)
   constructor() {
     this.genes = new Map();
+    this.genes.set(HEIGHT, 0);
+    this.genes.set(HELMET, 0);
+    this.genes.set(WEAPON, 0);
+    this.genes.set(BOOTS, 0);
+    this.genes.set(GLOVES, 0);
+    this.genes.set(BREASTPLATE, 0);
   }
 
   public getAptitude(): number {

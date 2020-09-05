@@ -4,15 +4,24 @@ import { uniformCross } from "./cross-methods/uniform-cross";
 import { uniformMultiGeneMutate } from "./mutation-methods/uniform-multi-gene";
 import { eliteSelect } from "./selection-methods/elite-select";
 import { timeCriterion } from "./stop-criteria/time-criterion";
+import { DEFAULT_STARTING_POPULATION } from "./defaults";
+import { GeneticEngine } from "./genetic-engine";
+import { GeneticEngineMetrics } from "./genetic-engine-metrics";
 const d3 = require('d3');
 
 export class Configuration {
+
+  startingPopulation: number;
+
   select: (population: Character[], quantity: number) => Character[];
   selectQuantity: number;
   cross: (c1: Character, c2: Character) => Character[];
   mutate: (c: Character) => Character;
   replace: (population: Character[], quantity: number) => Character[];
-  stopCriterion: (population: Character[]) => boolean;
+
+  stopCriterion: (geneticEngine: GeneticEngine) => boolean;
+  stopValue: number;//Might represent elapsed time, average fitness, etc. depending on the stop critetion
+
   equipment: AllItems;
 
   constructor(){ }
@@ -32,6 +41,7 @@ export class Configuration {
 
   static fromConfigObject(configObj: any): Configuration {
     let result: Configuration = new Configuration()
+    result.startingPopulation = configObj.startingPopulation ?? DEFAULT_STARTING_POPULATION;
     switch (configObj.crossMethod) {
       case 'uniform':
         result.cross = uniformCross;
@@ -46,7 +56,7 @@ export class Configuration {
         result.mutate = uniformMultiGeneMutate;
         break;
       default:
-        console.log('No mutation method provided, deaulting to uniformMultiGene.');
+        console.log('No mutation method provided, defaulting to uniformMultiGene.');
         result.mutate = uniformMultiGeneMutate;
     }
     
@@ -56,7 +66,7 @@ export class Configuration {
           result.select = eliteSelect;
           break;
         default:
-          console.log('No selection method provided, deaulting to elite.');
+          console.log('No selection method provided, defaulting to elite.');
           result.select = eliteSelect;
       }
     if (configObj.stopCriterion)
@@ -65,7 +75,7 @@ export class Configuration {
           result.stopCriterion = timeCriterion;
           break;
         default:
-          console.log('No stop criterion provided, deaulting to time.');
+          console.log('No stop criterion provided, defaulting to time.');
           result.stopCriterion = timeCriterion;
       }
     return result;

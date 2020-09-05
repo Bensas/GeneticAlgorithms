@@ -1,5 +1,4 @@
-import { Character, NUMBER_OF_ALLELES } from "../character";
-import { CharacterClass } from "../character-classes/character-class";
+import { Character } from "../character";
 
 
 export function uniformCross(c1: Character, c2: Character): Character[]{

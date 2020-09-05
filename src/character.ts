@@ -13,6 +13,12 @@ export class Character {
     breastplate: Item
   }
 
+  // constructor(charClass?: CharacterClass, charGenes?: )
+
+  public getAptitude(): number {
+    return this.class.aptitudeFunction(this.getAttack(), this.getDefense());
+  }
+
   private getStrength(){
     var suma: number = this.genes.helmet.strength + this.genes.weapon.strength + this.genes.boots.strength + this.genes.gloves.strength + this.genes.breastplate.strength;
     var strength: number = 100 * Math.tanh(0.01 * suma);
@@ -59,5 +65,3 @@ export class Character {
     return (this.getResistance() + this.getExp()) * this.getHealth() * this.getDFM();
   }
 }
-
-export const NUMBER_OF_ALLELES = 6;

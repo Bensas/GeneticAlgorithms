@@ -1,4 +1,5 @@
 {
+  "startingPopulation": 50,
   "crossMethod": "uniform",
   "mutationMethod": "uniformMultiGene",
   "selectionMethod": {

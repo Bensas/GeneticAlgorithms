@@ -2,16 +2,18 @@ import { Character } from "./character";
 import { Configuration } from "./configuration";
 import { Item } from "./items/item";
 import { AllItems } from "./items/all-items";
+import { GeneticEngineMetrics } from "./genetic-engine-metrics";
 
 export class GeneticEngine {
 
-  constructor(private config: Configuration, private allItems: AllItems) {
-  }
+  metrics: GeneticEngineMetrics;
+
+  constructor(public config: Configuration, private allItems: AllItems) { }
 
   startEvolution(canvas: HTMLCanvasElement){
     let population = this.generateRandomPopulation();
 
-    while(this.stopCriterion(population, )){
+    while(this.config.stopCriterion(this)){
       let parents = this.config.select(population, this.config.selectQuantity);
       // let children = this.cross(parents);
       // children = this.mutate(children);
@@ -29,10 +31,6 @@ export class GeneticEngine {
 
   randomValue(lista: Item[]){
     
-  }
-
-  select(population: Character[]): Character[] {
-    return this.select(population);
   }
 
   // cross (population: Character[]){

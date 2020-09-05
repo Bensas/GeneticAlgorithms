@@ -1,13 +1,5 @@
-import { Character} from "../character";
+import { GeneticEngine } from "../genetic-engine";
 
-export function timeCriterion(spopulation: Character[]): boolean {
-//   if(!timeCriterion.elapsedTime) {
-//       foo.counter = 0;
-//   }
-// foo.counter++;
-// document.write(foo.counter+"<br />");
-//   const aptituteFunction = population[0].class.aptitude;
-//   // return population.sort((c1, c2) => aptituteFunction(c1.getAttack(), c1.getDefens).splice(0, quantity);
-//   return population.splice(0, quantity);
-  return false;
+export function timeCriterion(geneticEngine: GeneticEngine): boolean {
+  return geneticEngine.metrics.elapsedTime > geneticEngine.config.stopValue;
 }

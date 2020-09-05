@@ -20,11 +20,11 @@ export class Character {
   constructor() {
     this.genes = new Map();
     this.genes.set(HEIGHT, 0);
-    this.genes.set(HELMET, 0);
-    this.genes.set(WEAPON, 0);
-    this.genes.set(BOOTS, 0);
-    this.genes.set(GLOVES, 0);
-    this.genes.set(BREASTPLATE, 0);
+    this.genes.set(HELMET, <Item>{});
+    this.genes.set(WEAPON, <Item>{});
+    this.genes.set(BOOTS, <Item>{});
+    this.genes.set(GLOVES, <Item>{});
+    this.genes.set(BREASTPLATE, <Item>{});
   }
 
   public getAptitude(): number {

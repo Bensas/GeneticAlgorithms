@@ -25,6 +25,7 @@ export class GeneticEngine {
   }
 
   initMetrics(population: Character[]): void {
+    console.log(population);
     this.metrics = {
       averageFitness: this.averageFitness(population),
       minFitness: this.minFitness(population),
@@ -48,18 +49,18 @@ export class GeneticEngine {
       newChar.genes.forEach((value, key) => {
         if (typeof value !== 'number'){
           if(key === 'helmet')
-            (<Item>value) = this.randomItem(this.allItems.helmets);
+            newChar.genes.set(key, this.randomItem(this.allItems.helmets));
           else if(key === 'boots')
-            (<Item>value) = this.randomItem(this.allItems.boots);
+            newChar.genes.set(key, this.randomItem(this.allItems.boots));
           else if(key === 'gloves')
-            (<Item>value) = this.randomItem(this.allItems.gloves);
+            newChar.genes.set(key, this.randomItem(this.allItems.gloves));
           else if(key === 'breastplate')
-            (<Item>value) = this.randomItem(this.allItems.breastplates);
+            newChar.genes.set(key, this.randomItem(this.allItems.breastplates));
           else if(key === 'weapon')
-            (<Item>value) = this.randomItem(this.allItems.weapons);
+            newChar.genes.set(key, this.randomItem(this.allItems.weapons));
         }
         else{
-          (<Number>value) = Math.floor(Math.random()*(20 - 13) + 13) / 10;
+          newChar.genes.set(key, Math.floor(Math.random()*(20 - 13) + 13) / 10);
         }
         poblacion.push(newChar);
       });

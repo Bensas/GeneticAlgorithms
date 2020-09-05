@@ -4,9 +4,8 @@ import { uniformCross } from "./cross-methods/uniform-cross";
 import { uniformMultiGeneMutate } from "./mutation-methods/uniform-multi-gene";
 import { eliteSelect } from "./selection-methods/elite-select";
 import { timeCriterion } from "./stop-criteria/time-criterion";
-import { DEFAULT_STARTING_POPULATION } from "./defaults";
+import { DEFAULT_STARTING_POPULATION, DEFAULT_SELECT_QUANTITY, DEFAULT_MUTATION_CHANCE } from "./defaults";
 import { GeneticEngine } from "./genetic-engine";
-import { GeneticEngineMetrics } from "./genetic-engine-metrics";
 const d3 = require('d3');
 
 export class Configuration {
@@ -16,7 +15,8 @@ export class Configuration {
   select: (population: Character[], quantity: number) => Character[];
   selectQuantity: number;
   cross: (c1: Character, c2: Character) => Character[];
-  mutate: (c: Character) => Character;
+  mutate: (c: Character, mutationChance: number) => Character;
+  mutationChance: number;
   replace: (population: Character[], quantity: number) => Character[];
 
   stopCriterion: (geneticEngine: GeneticEngine) => boolean;
@@ -42,6 +42,9 @@ export class Configuration {
   static fromConfigObject(configObj: any): Configuration {
     let result: Configuration = new Configuration()
     result.startingPopulation = configObj.startingPopulation ?? DEFAULT_STARTING_POPULATION;
+    result.selectQuantity = configObj.selectQuantity ?? DEFAULT_SELECT_QUANTITY;
+    result.mutationChance = configObj.mutationChance ?? DEFAULT_MUTATION_CHANCE;
+
     switch (configObj.crossMethod) {
       case 'uniform':
         result.cross = uniformCross;

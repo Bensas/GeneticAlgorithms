@@ -16,7 +16,7 @@ export class GeneticEngine {
     while(this.config.stopCriterion(this)){
       let parents = this.config.select(population, this.config.selectQuantity);
       let children = this.cross(parents);
-      // children = this.mutate(children);
+      children = this.mutate(children);
       // population = this.replace(newPopulation.concat(population);
     }
   }
@@ -33,12 +33,16 @@ export class GeneticEngine {
     
   }
 
-  cross (population: Character[]){
+  cross (population: Character[]): Character[]{
     let result: Character[] = [];
     for (let i = 0; i < population.length; i += 2) {
       result = result.concat(this.config.cross(population[i], population[i+1]));
     }
     return result;
+  }
+
+  mutate (population: Character[]): Character[] {
+    return population.map((character: Character) => this.config.mutate(character, this.config.mutationChance));
   }
   
 }

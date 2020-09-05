@@ -2,6 +2,7 @@
   "startingPopulation": 50,
   "crossMethod": "uniform",
   "mutationMethod": "uniformMultiGene",
+  "mutationChance": 0.3,
   "selectionMethod": {
     "method": "elite",
     "quantity": 30

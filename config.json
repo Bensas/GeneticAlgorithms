@@ -1,11 +1,11 @@
 {
-  "startingPopulation": 50,
+  "startingPopulation": 3000,
   "crossMethod": "uniform",
-  "mutationMethod": "uniformMultiGene",
-  "mutationChance": 0.3,
+  "mutationMethod": "complete",
+  "mutationChance": 0.5,
   "selectionMethod": {
     "method": "elite",
-    "quantity": 30
+    "quantity": 1500
   },
   "implementationStrategy": "fillAll",
   "stopCriterion": {

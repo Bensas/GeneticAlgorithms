@@ -14,7 +14,7 @@ export function limitedMultiGenMutate(c: Character, mutationChance: number, gene
             else
                 c.genes.set(palabra, geneticEngine.randomItem(palabra));
             max--;
-            type.slice(sorteo, 1);
+            type.splice(sorteo, 1);
         }
     }
     return c;

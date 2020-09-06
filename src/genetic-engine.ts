@@ -16,7 +16,7 @@ export class GeneticEngine {
     console.log('Random Population:');
     console.log(population);
     while(!this.config.stopCriterion(this)){
-      let parents = this.config.select(population, this.config.selectQuantity);
+      let parents = this.config.select(population, this.config.selectQuantity, this);
       let children = this.cross(parents);
       children = this.mutate(children);
       population = this.config.replace(population.concat(children), this.config.selectQuantity);

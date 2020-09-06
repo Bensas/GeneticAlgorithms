@@ -11,6 +11,10 @@ import { completeGenMutate } from "./mutation-methods/complete-gene";
 import { oneGenMutate } from "./mutation-methods/one-gen";
 import { limitedMultiGenMutate } from "./mutation-methods/limited-multi-gene";
 import { structureCriterion } from "./stop-criteria/structure-criterion";
+import { boltzmannSelect } from "./selection-methods/boltzmann-select";
+import { rankingSelect } from "./selection-methods/ranking-select";
+import { rouletteSelect } from "./selection-methods/roulette-select";
+import { universalSelect } from "./selection-methods/universal-select";
 const d3 = require('d3');
 
 export const WARRIOR = 'warrior';
@@ -24,7 +28,7 @@ export class Configuration {
 
   startingPopulation: number;
 
-  select: (population: Character[], quantity: number) => Character[];
+  select: (population: Character[], quantity: number, geneticEngine: GeneticEngine) => Character[];
   selectQuantity: number;
   cross: (c1: Character, c2: Character) => Character[];
   mutate: (c: Character, mutationChance: number, geneticEngine: GeneticEngine) => Character;
@@ -112,6 +116,17 @@ export class Configuration {
         case 'elite':
           result.select = eliteSelect;
           break;
+        case 'ranking':
+          result.select = rankingSelect;
+          break;
+        case 'roulette':
+          result.select = rouletteSelect;
+          break;
+        case 'universal':
+          result.select = universalSelect;
+          break;
+        case 'boltzmann':
+          result.select = boltzmannSelect;
         default:
           console.log('No selection method provided, defaulting to elite.');
           result.select = eliteSelect;
@@ -135,8 +150,3 @@ export class Configuration {
     return result;
   }
 }
-
-// "stopCriterion": {
-//   "criterion": "time",
-//   "value": 60
-// }

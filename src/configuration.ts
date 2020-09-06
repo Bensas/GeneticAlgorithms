@@ -104,10 +104,12 @@ export class Configuration {
       switch (configObj.stopCriterion.criterion) {
         case 'time':
           result.stopCriterion = timeCriterion;
+          result.stopValue = configObj.stopCriterion.value;
           break;
         default:
           console.log('No stop criterion provided, defaulting to time.');
           result.stopCriterion = timeCriterion;
+          result.stopValue = 60;
       }
     return result;
   }

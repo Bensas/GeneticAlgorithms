@@ -42,13 +42,3 @@ window.onload = () => {
     };
   }
 }
-
-// sleep time expects milliseconds
-function sleep (time: number) {
-  return new Promise((resolve) => setTimeout(resolve, time));
-}
-
-// Usage!
-sleep(500).then(() => {
-    // Do something after the sleep!
-});

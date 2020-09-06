@@ -23,9 +23,10 @@ export class GeneticEngine {
       children = this.mutate(children);
       // console.log(population.concat(children).length);
       population = this.config.replace(population.concat(children), this.config.selectQuantity);
-      // console.log(population.length);
       this.calculateMetrics(population);
-      // console.log(this.metrics.averageFitness);
+      // console.log(population[0]);
+      console.log('Average fitness: ' + this.metrics.averageFitness);
+      console.log('Min fitness: ' + this.metrics.minFitness);
     }
   }
 
@@ -44,7 +45,6 @@ export class GeneticEngine {
     this.metrics.minFitness = this.minFitness(population);
     this.metrics.historicalMaxFitness.push(this.maxFitness(population));
     this.metrics.generationNumber++;
-    //console.log(this.metrics);
   }
 
   generateRandomPopulation(startingPopulation: number): Character[]{

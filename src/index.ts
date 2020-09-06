@@ -32,11 +32,23 @@ window.onload = () => {
         await ItemLoader.loadItemsFromTsv('guantesReduced.tsv', allItems.gloves);
         if (loadingMessage) loadingMessage.innerHTML = 'Loading breastplates...';
         await ItemLoader.loadItemsFromTsv('pecherasReduced.tsv', allItems.breastplates);
+        
         if (loadingMessage) loadingMessage.innerHTML = 'All Items loaded :)';
-
+        
         const geneticEngine = new GeneticEngine(config, allItems);
         geneticEngine.startEvolution(metricsCanvas);
+        
       }
     };
   }
 }
+
+// sleep time expects milliseconds
+function sleep (time: number) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
+
+// Usage!
+sleep(500).then(() => {
+    // Do something after the sleep!
+});

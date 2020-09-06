@@ -11,6 +11,12 @@ import { completeGenMutate } from "./mutation-methods/complete-gene";
 import { oneGenMutate } from "./mutation-methods/one-gen";
 import { limitedMultiGenMutate } from "./mutation-methods/limited-multi-gene";
 import { structureCriterion } from "./stop-criteria/structure-criterion";
+import { anularCross } from "./cross-methods/anular-cross";
+import { onePointCross } from "./cross-methods/one-point-cross";
+import { twoPointCross } from "./cross-methods/two-point-cross";
+import { enoughGenCriterion } from "./stop-criteria/enough-gen-criterion";
+import { contentCriterion } from "./stop-criteria/content-criterion";
+import { acceptableCriterion } from "./stop-criteria/acceptable-criterion";
 const d3 = require('d3');
 
 export const WARRIOR = 'warrior';
@@ -82,6 +88,15 @@ export class Configuration {
       case 'uniform':
         result.cross = uniformCross;
         break;
+      case 'anular':
+        result.cross = anularCross;
+        break;
+      case 'onePoint':
+        result.cross = onePointCross;
+        break;
+      case 'twoPoint':
+        result.cross = twoPointCross;
+        break;
       default:
         console.log('No cross method provided, deaulting to uniform.');
         result.cross = uniformCross;
@@ -118,6 +133,18 @@ export class Configuration {
       }
     if (configObj.stopCriterion)
       switch (configObj.stopCriterion.criterion) {
+        case 'amount':
+          result.stopCriterion = enoughGenCriterion;
+          result.stopValue = configObj.stopCriterion.value;
+          break;
+        case 'content':
+          result.stopCriterion = contentCriterion;
+          result.stopValue = configObj.stopCriterion.value;
+          break;
+        case 'acceptable':
+          result.stopCriterion = acceptableCriterion;
+          result.stopValue = configObj.stopCriterion.value;
+          break;
         case 'time':
           result.stopCriterion = timeCriterion;
           result.stopValue = configObj.stopCriterion.value;

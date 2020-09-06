@@ -1,6 +1,6 @@
 import { Character } from "../character";
 
-export function AnularCross(c1: Character, c2: Character): Character[]{
+export function anularCross(c1: Character, c2: Character): Character[]{
   let firstChild: Character = new Character(c1.class);
   let secondChild: Character = new Character(c2.class);
   let locus: number = Math.floor(Math.random()*(c1.genes.keys.length));

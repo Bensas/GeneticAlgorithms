@@ -1,3 +1,11 @@
 h1 {
   font-family: 'Courier New', Courier, monospace;
 }
+
+body {
+  margin: 3% 10% 0 10%;
+}
+
+#select-class-text {
+  display: none;
+}

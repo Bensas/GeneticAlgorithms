@@ -8,10 +8,21 @@
   </head>
   <body>
     <h1>Welcome to the Magical Mutation Machine</h1>
-    <p>Please upload a configuration file: <input id="config-uploader" type="file"></p>
-    <select>
-      <option>clase 1</option>
-    </select>
+    <div>
+      <p id="config-text">Please upload a configuration file to begin: </p>
+      <input id="config-uploader" type="file">
+    </div>
+    
+    <div id="select-class-text">
+      <p>Please select a character class:</p>
+      <select id="select-class-select">
+        <option value="warrior">Warrior</option>
+        <option value="archer">Archer</option>
+        <option value="tank">Tank</option>
+        <option value="spy">Spy</option>
+      </select>
+      <button id="start-button">Start!</button>
+    </div>
     <p id="loading-message"></p>
     <canvas id="metrics-canvas"></canvas>
     <script src="./bundle.js"></script>

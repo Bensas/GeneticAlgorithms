@@ -20,7 +20,9 @@ export class GeneticEngine {
       let parents = this.config.select(population, this.config.selectQuantity);
       let children = this.cross(parents);
       children = this.mutate(children);
+      console.log(population.concat(children).length);
       population = this.config.replace(population.concat(children), this.config.selectQuantity);
+      console.log(population.length);
       this.calculateMetrics(population);
       console.log(this.metrics.averageFitness);
     }

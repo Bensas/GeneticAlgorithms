@@ -40,9 +40,9 @@ export class Character {
     let suma: number = 0;
     this.genes.forEach((value, key) => {
       if (typeof value !== 'number')
-        suma += (<Item>value).strength;
+        suma += Number(((<Item>value).strength));
     });
-    var strength: number = 100 * Math.tanh(0.01 * suma);
+    let strength: number = 100 * Math.tanh(0.01 * suma);
     return strength;
   }
 
@@ -50,9 +50,9 @@ export class Character {
     let suma: number = 0;
     this.genes.forEach((value, key) => {
       if (typeof value !== 'number')
-        suma += (<Item>value).health;
+        suma += Number((<Item>value).health);
     });
-    var health: number = 100 * Math.tanh(0.01 * suma);
+    let health: number = 100 * Math.tanh(0.01 * suma);
     return health;
   }
 
@@ -60,9 +60,9 @@ export class Character {
     let suma: number = 0;
     this.genes.forEach((value, key) => {
       if (typeof value !== 'number')
-        suma += (<Item>value).agility;
+        suma += Number((<Item>value).agility);
     });
-    var agility: number = Math.tanh(0.01 * suma);
+    let agility: number = Math.tanh(0.01 * suma);
     return agility;
   }
 
@@ -70,9 +70,9 @@ export class Character {
     let suma: number = 0;
     this.genes.forEach((value, key) => {
       if (typeof value !== 'number')
-        suma += (<Item>value).exp;
+        suma += Number((<Item>value).exp);
     });
-    var strength: number = 0.6 * Math.tanh(0.01 * suma);
+    let strength: number = 0.6 * Math.tanh(0.01 * suma);
     return strength;
   }
 
@@ -80,9 +80,9 @@ export class Character {
     let suma: number = 0;
     this.genes.forEach((value, key) => {
       if (typeof value !== 'number')
-        suma += (<Item>value).resistance;
+        suma += Number((<Item>value).resistance);
     });
-    var strength: number = Math.tanh(0.01 * suma);
+    let strength: number = Math.tanh(0.01 * suma);
     return strength;
   }
 

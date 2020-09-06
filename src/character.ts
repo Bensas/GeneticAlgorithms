@@ -87,11 +87,11 @@ export class Character {
   }
 
   private getATM(){
-    return 0.7 - Math.pow(3 * <number>this.genes.get(HEIGHT) - 5, 4) + Math.pow(3 * <number>this.genes.get(HEIGHT) - 5, 2) + <number>this.genes.get(HEIGHT)/4;
+    return 0.7 - Math.pow(3 * Number(this.genes.get(HEIGHT)) - 5, 4) + Math.pow(3 * Number(this.genes.get(HEIGHT)) - 5, 2) + Number(this.genes.get(HEIGHT))/4;
   }
 
   private getDFM(){
-    return 1.9 + Math.pow(2.5 * <number>this.genes.get(HEIGHT) - 4.16, 4) - Math.pow(2.5 * <number>this.genes.get(HEIGHT) - 4.16, 2) - (3 * <number>this.genes.get(HEIGHT)) / 4;
+    return 1.9 + Math.pow(2.5 * Number(this.genes.get(HEIGHT)) - 4.16, 4) - Math.pow(2.5 * Number(this.genes.get(HEIGHT)) - 4.16, 2) - (3 * Number(this.genes.get(HEIGHT))) / 10;
   }
 
   getAttack(){

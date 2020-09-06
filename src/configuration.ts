@@ -7,6 +7,9 @@ import { timeCriterion } from "./stop-criteria/time-criterion";
 import { DEFAULT_STARTING_POPULATION, DEFAULT_SELECT_QUANTITY, DEFAULT_MUTATION_CHANCE } from "./defaults";
 import { GeneticEngine } from "./genetic-engine";
 import { CharacterClass, Warrior, Archer, Tank, Spy } from "./character-classes/character-class";
+import { completeGenMutate } from "./mutation-methods/complete-gene";
+import { oneGenMutate } from "./mutation-methods/one-gen";
+import { limitedMultiGenMutate } from "./mutation-methods/limited-multi-gene";
 const d3 = require('d3');
 
 export const WARRIOR = 'warrior';
@@ -86,9 +89,20 @@ export class Configuration {
       case 'uniformMultiGene':
         result.mutate = uniformMultiGeneMutate;
         break;
+      case 'complete':
+        result.mutate = completeGenMutate;
+        break;
+      case 'oneGene':
+        result.mutate = oneGenMutate;
+        break;
+      case 'limitedMultiGene':
+        result.mutate = limitedMultiGenMutate;
+        break;
+
       default:
         console.log('No mutation method provided, defaulting to uniformMultiGene.');
         result.mutate = uniformMultiGeneMutate;
+        
     }
     
     if (configObj.selectionMethod)

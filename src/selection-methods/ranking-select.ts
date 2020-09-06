@@ -9,7 +9,7 @@ export function rankingSelect(population: Character[], quantity: number): Charac
 export function getPseudoAptitudePopulation(population: Character[]): Character[] {
   return population.sort((c1, c2) => c2.getAptitude() - c1.getAptitude())
                     .map((character, index) => {
-                      character.getAptitude = () => index + 1;
+                      character.getAptitude = () => (population.length - (index + 1))/population.length;
                       return character;
                     });
 }

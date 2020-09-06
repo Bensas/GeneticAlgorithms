@@ -15,8 +15,8 @@ describe('Ranking Selection', function () {
         population.push(newChar);
       }
       const pseudoAptPop = getPseudoAptitudePopulation(population);
-      assert(pseudoAptPop[0].getAptitude() === 1);
-      assert(pseudoAptPop[9].getAptitude() === 10);
+      assert(pseudoAptPop[0].getAptitude() === (10 - 1)/10);
+      assert(pseudoAptPop[9].getAptitude() === (10 -10) / 10);
     });
   });
 });

@@ -18,21 +18,24 @@ export class GeneticEngine {
     let population = this.generateRandomPopulation(this.config.startingPopulation);
     this.initMetrics(population);
     this.chart = new MetricsChart(canvas);
-    while(!this.config.stopCriterion(this)){
+    const loop = setInterval(() => {
       let parents = this.config.select(population, this.config.selectQuantity, this);
       let children = this.cross(parents);
       children = this.mutate(children);
       population = this.config.replace(population.concat(children), this.config.selectQuantity);
       this.calculateMetrics(population);
-      console.log('Average fitness: ' + this.metrics.historicalAverageFitness[this.metrics.historicalAverageFitness.length -1]);
+      this.chart.updateChart(this.metrics);
+      console.log('Average fitness: ' + this.metrics.averageFitness);
       // console.log('Min fitness: ' + this.metrics.minFitness);
-    }
+      if (this.config.stopCriterion(this))
+        clearInterval(loop);
+    }, 900);
   }
 
   initMetrics(population: Character[]): void {
     this.metrics = {
-      historicalAverageFitness: [this.averageFitness(population)],
-      historicalMinFitness: [this.minFitness(population)],
+      averageFitness: this.averageFitness(population),
+      minFitness: this.minFitness(population),
       startTime: new Date().getTime(),
       historicalMaxFitness: [this.maxFitness(population)],
       generationNumber: 0,
@@ -41,8 +44,8 @@ export class GeneticEngine {
   }
 
   calculateMetrics(population: Character[]): void {
-    this.metrics.historicalAverageFitness.push(this.averageFitness(population));
-    this.metrics.historicalMinFitness.push(this.minFitness(population));
+    this.metrics.averageFitness = this.averageFitness(population);
+    this.metrics.minFitness = this.minFitness(population);
     this.metrics.historicalMaxFitness.push(this.maxFitness(population));
     this.metrics.generationNumber++;
     this.metrics.modeFitness.push(this.modeFitness(population));

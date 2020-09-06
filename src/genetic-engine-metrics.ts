@@ -1,8 +1,8 @@
 import { modeItem } from "./mode-item";
 
 export interface GeneticEngineMetrics {
-  historicalAverageFitness: number[],
-  historicalMinFitness: number[],
+  averageFitness: number,
+  minFitness: number,
   startTime: number,
   historicalMaxFitness: number[],
   generationNumber: number,

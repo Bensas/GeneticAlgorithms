@@ -1,32 +1,22 @@
 import { GeneticEngineMetrics } from "./genetic-engine-metrics";
 
 const chartjs = require('chart.js');
-var config = {
+const INITIAL_CONFIG = {
   type: 'line',
   data: {
     labels: [],
     datasets: [{
-      label: 'My First dataset',
+      label: 'Min Fitness',
       backgroundColor: 'rgb(255, 99, 132)', //Red
       borderColor: 'rgb(255, 99, 132)', //Red
-      data: [
-        15,
-        16,
-        17,
-        23
-      ],
+      data: [],
       fill: false,
     }, {
-      label: 'My Second dataset',
+      label: 'Average Fitness',
       fill: false,
       backgroundColor: 'rgb(54, 162, 235)', //Blue
       borderColor: 'rgb(54, 162, 235)', //Blue
-      data: [
-        12,
-        14,
-        15,
-        18
-      ],
+      data: [],
     }]
   },
   options: {
@@ -64,14 +54,20 @@ var config = {
 export class MetricsChart {
   ctx: any;
   chart: any;
+  config: any = INITIAL_CONFIG;
 
   constructor(canvas: HTMLCanvasElement) {
     this.ctx = canvas.getContext('2d');
-		this.chart = new chartjs.Chart(this.ctx, config);
+		this.chart = new chartjs.Chart(this.ctx, this.config);
   }
 
   public updateChart(metrics: GeneticEngineMetrics) {
-    
+    this.config.data.datasets[0].data.push(metrics.minFitness);
+    this.config.data.datasets[1].data.push(metrics.averageFitness);
+    this.config.data.labels.push(metrics.generationNumber);
+    this.chart.update();
+    console.log(this.config.data.datasets[0].data);
+
   }
 
   

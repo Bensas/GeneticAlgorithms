@@ -3,6 +3,7 @@ import { Configuration } from "./configuration";
 import { Item } from "./items/item";
 import { AllItems } from "./items/all-items";
 import { GeneticEngineMetrics } from "./genetic-engine-metrics";
+import { modeItem } from "./mode-item";
 
 export class GeneticEngine {
 
@@ -32,7 +33,8 @@ export class GeneticEngine {
       minFitness: this.minFitness(population),
       startTime: new Date().getTime(),
       historicalMaxFitness: [this.maxFitness(population)],
-      generationNumber: 0
+      generationNumber: 0,
+      modeFitness: [this.modeFitness(population)]
     };
   }
 
@@ -41,6 +43,7 @@ export class GeneticEngine {
     this.metrics.minFitness = this.minFitness(population);
     this.metrics.historicalMaxFitness.push(this.maxFitness(population));
     this.metrics.generationNumber++;
+    this.metrics.modeFitness.push(this.modeFitness(population));
   }
 
   generateRandomPopulation(startingPopulation: number): Character[]{
@@ -126,4 +129,9 @@ export class GeneticEngine {
     return population.reduce((prev, current) => current.getAptitude() > prev ? current.getAptitude() : prev, population[0].getAptitude());
   }
   
+  modeFitness(population: Character[]): modeItem {
+    let modeValue: modeItem = {mode: 0, percentage: 0};
+    // formula para calcular la moda y el porcentaje de personas q tienen ese fitness;
+    return modeValue;
+  }
 }

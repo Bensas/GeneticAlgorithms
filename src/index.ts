@@ -10,7 +10,7 @@ window.onload = () => {
   let selectClassText = document.getElementById('select-class-text');
   let startButton = document.getElementById('start-button');
   let loadingMessage = document.getElementById('loading-message');
-  let metricsCanvas = document.getElementById('metrics-cavas');
+  let metricsCanvas = document.getElementById('metrics-canvas');
   
   if (configUploader) {
     configUploader.onchange = async (event: any) => {
@@ -36,7 +36,7 @@ window.onload = () => {
         if (loadingMessage) loadingMessage.innerHTML = 'All Items loaded :)';
         
         const geneticEngine = new GeneticEngine(config, allItems);
-        geneticEngine.startEvolution(metricsCanvas);
+        geneticEngine.startEvolution(<HTMLCanvasElement>metricsCanvas);
         
       }
     };

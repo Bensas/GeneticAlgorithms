@@ -9,8 +9,8 @@
   },
   "implementationStrategy": "fillAll",
   "stopCriterion": {
-    "criterion": "structure",
-    "value": 0.4,
+    "criterion": "acceptable",
+    "value": 23.0,
     "numberOfGenerations": 30
   }
 }

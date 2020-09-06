@@ -3,33 +3,35 @@ import { Configuration } from "./configuration";
 import { Item } from "./items/item";
 import { AllItems } from "./items/all-items";
 import { GeneticEngineMetrics } from "./genetic-engine-metrics";
+import { MetricsChart } from "./metrics-chart";
 
 export class GeneticEngine {
 
   metrics: GeneticEngineMetrics;
 
+  chart: MetricsChart;
+
   constructor(public config: Configuration, private allItems: AllItems) { }
 
-  startEvolution(canvas: HTMLElement | null){
+  startEvolution(canvas: HTMLCanvasElement){
     let population = this.generateRandomPopulation(this.config.startingPopulation);
     this.initMetrics(population);
-    console.log('Random Population:');
-    console.log(population);
+    this.chart = new MetricsChart(canvas);
     while(!this.config.stopCriterion(this)){
       let parents = this.config.select(population, this.config.selectQuantity, this);
       let children = this.cross(parents);
       children = this.mutate(children);
       population = this.config.replace(population.concat(children), this.config.selectQuantity);
       this.calculateMetrics(population);
-      console.log('Average fitness: ' + this.metrics.averageFitness);
-      console.log('Min fitness: ' + this.metrics.minFitness);
+      console.log('Average fitness: ' + this.metrics.historicalAverageFitness[this.metrics.historicalAverageFitness.length -1]);
+      // console.log('Min fitness: ' + this.metrics.minFitness);
     }
   }
 
   initMetrics(population: Character[]): void {
     this.metrics = {
-      averageFitness: this.averageFitness(population),
-      minFitness: this.minFitness(population),
+      historicalAverageFitness: [this.averageFitness(population)],
+      historicalMinFitness: [this.minFitness(population)],
       startTime: new Date().getTime(),
       historicalMaxFitness: [this.maxFitness(population)],
       generationNumber: 0
@@ -37,8 +39,8 @@ export class GeneticEngine {
   }
 
   calculateMetrics(population: Character[]): void {
-    this.metrics.averageFitness = this.averageFitness(population);
-    this.metrics.minFitness = this.minFitness(population);
+    this.metrics.historicalAverageFitness.push(this.averageFitness(population));
+    this.metrics.historicalMinFitness.push(this.minFitness(population));
     this.metrics.historicalMaxFitness.push(this.maxFitness(population));
     this.metrics.generationNumber++;
   }

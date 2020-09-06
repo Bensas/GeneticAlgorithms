@@ -1,6 +1,6 @@
 export interface GeneticEngineMetrics {
-  averageFitness: number,
-  minFitness: number,
+  historicalAverageFitness: number[],
+  historicalMinFitness: number[],
   startTime: number,
   historicalMaxFitness: number[],
   generationNumber: number

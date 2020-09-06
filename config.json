@@ -9,7 +9,8 @@
   },
   "implementationStrategy": "fillAll",
   "stopCriterion": {
-    "criterion": "time",
-    "value": 1000
+    "criterion": "structure",
+    "value": 0.4,
+    "numberOfGenerations": 30
   }
 }

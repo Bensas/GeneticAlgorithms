@@ -10,6 +10,7 @@ import { CharacterClass, Warrior, Archer, Tank, Spy } from "./character-classes/
 import { completeGenMutate } from "./mutation-methods/complete-gene";
 import { oneGenMutate } from "./mutation-methods/one-gen";
 import { limitedMultiGenMutate } from "./mutation-methods/limited-multi-gene";
+import { structureCriterion } from "./stop-criteria/structure-criterion";
 const d3 = require('d3');
 
 export const WARRIOR = 'warrior';
@@ -32,6 +33,7 @@ export class Configuration {
 
   stopCriterion: (geneticEngine: GeneticEngine) => boolean;
   stopValue: number;//Might represent elapsed time, average fitness, etc. depending on the stop critetion
+  numberOfGenerations: number;
 
   equipment: AllItems;
 
@@ -119,6 +121,11 @@ export class Configuration {
         case 'time':
           result.stopCriterion = timeCriterion;
           result.stopValue = configObj.stopCriterion.value;
+          break;
+        case 'structure':
+          result.stopCriterion = structureCriterion;
+          result.stopValue = configObj.stopCriterion.value;
+          result.numberOfGenerations = configObj.stopCriterion.numberOfGenerations;
           break;
         default:
           console.log('No stop criterion provided, defaulting to time.');

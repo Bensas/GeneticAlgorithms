@@ -49,6 +49,7 @@ export class Configuration {
     result.startingPopulation = configObj.startingPopulation ?? DEFAULT_STARTING_POPULATION;
     result.selectQuantity = configObj.selectQuantity ?? DEFAULT_SELECT_QUANTITY;
     result.mutationChance = configObj.mutationChance ?? DEFAULT_MUTATION_CHANCE;
+    result.replace = eliteSelect;
 
     switch (configObj.crossMethod) {
       case 'uniform':

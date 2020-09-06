@@ -17,7 +17,12 @@ export class Character {
   genes: Map<string, number | Item>;
 
   // constructor(charClass?: CharacterClass, charGenes?)
-  constructor() {
+  constructor(charClass: CharacterClass) {
+    this.initGeneMap();
+    this.class = charClass;
+  }
+
+  private initGeneMap(): void{
     this.genes = new Map();
     this.genes.set(HEIGHT, 0);
     this.genes.set(HELMET, <Item>{});

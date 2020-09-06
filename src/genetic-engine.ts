@@ -54,8 +54,7 @@ export class GeneticEngine {
   }
 
   freshCharacter(): Character {
-    let newChar = new Character();
-    newChar.class = this.config.selectedCharacterClass;
+    let newChar = new Character(this.config.selectedCharacterClass);
     newChar.genes.forEach((value, key) => {
       if (typeof value !== 'number'){
         if(key === 'helmet')

@@ -5,26 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>MMM</title>
     <link rel="stylesheet" type="text/css" href="styles/global.css">
+    <script src="https://kit.fontawesome.com/61eade5f0e.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <h1>Welcome to the Magical Mutation Machine</h1>
-    <div>
-      <p id="config-text">Please upload a configuration file to begin: </p>
-      <input id="config-uploader" type="file">
+    <div id="config-uploader-text" class="flex-center-vertical">
+      <p>Please upload a configuration file to begin: </p>
+      <div class="file-upload">
+        <input id="config-uploader" type="file">
+        <i class="fa fa-arrow-up"></i>     
+      </div>
     </div>
     
-    <div id="select-class-text">
-      <p>Please select a character class:</p>
-      <select id="select-class-select">
-        <option value="warrior">Warrior</option>
-        <option value="archer">Archer</option>
-        <option value="tank">Tank</option>
-        <option value="spy">Spy</option>
-      </select>
+    <div id="select-class-text" class="flex-center-vertical">
+      <p>Please select a character class:
+        <select id="select-class-select">
+          <option value="warrior">Warrior</option>
+          <option value="archer">Archer</option>
+          <option value="tank">Tank</option>
+          <option value="spy">Spy</option>
+        </select>
+      </p>
       <button id="start-button">Start!</button>
     </div>
     <p id="loading-message"></p>
     <canvas id="metrics-canvas"></canvas>
+    <div id="character-card"></div>
     <script src="./bundle.js"></script>
   </body>
 </html>

@@ -1,4 +1,4 @@
-import { Character, HELMET, BOOTS, GLOVES, BREASTPLATE, WEAPON } from "./character";
+import { Character, HELMET, BOOTS, GLOVES, BREASTPLATE, WEAPON, HEIGHT } from "./character";
 import { Configuration } from "./configuration";
 import { Item } from "./items/item";
 import { AllItems } from "./items/all-items";
@@ -14,7 +14,7 @@ export class GeneticEngine {
 
   constructor(public config: Configuration, private allItems: AllItems) { }
 
-  startEvolution(canvas: HTMLCanvasElement){
+  startEvolution(canvas: HTMLCanvasElement, resultElem: HTMLElement){
     let population = this.generateRandomPopulation(this.config.startingPopulation);
     this.initMetrics(population);
     this.chart = new MetricsChart(canvas);
@@ -27,9 +27,12 @@ export class GeneticEngine {
       this.chart.updateChart(this.metrics);
       console.log('Average fitness: ' + this.metrics.averageFitness);
       // console.log('Min fitness: ' + this.metrics.minFitness);
-      if (this.config.stopCriterion(this))
+      if (this.config.stopCriterion(this)){
         clearInterval(loop);
-    }, 900);
+        resultElem.innerHTML = this.generateCharCardHtml(population[0]);
+        resultElem.style.display = 'block';
+      }
+    }, 100);
   }
 
   initMetrics(population: Character[]): void {
@@ -138,5 +141,23 @@ export class GeneticEngine {
     let modeValue: modeItem = {mode: 0, percentage: 0};
     // formula para calcular la moda y el porcentaje de personas q tienen ese fitness;
     return modeValue;
+  }
+
+  generateCharCardHtml(character: Character): string {
+    let baseHtml = '<p> <b>Optimal Character</b></p>\
+                      <p> <b>Height:</b> {{height}}</p>\
+                      <p> <b>Helmet:</b> {{helmet}}</p>\
+                      <p> <b>Weapon:</b> {{weapon}}</p>\
+                      <p> <b>Boots:</b> {{boots}}</p>\
+                      <p> <b>Gloves:</b> {{gloves}}</p>\
+                      <p> <b>Breastplate:</b> {{breastplate}}</p>'
+    return this.replaceValuesInStringFromMap(baseHtml, character.genes);
+  }
+
+  replaceValuesInStringFromMap(string: string, map: Map<any, any>){
+    map.forEach((value, key) => {
+      string = string.replace('{{' + key + '}}', key===HEIGHT? value : value.id);
+    });
+    return string;
   }
 }

@@ -23,6 +23,8 @@ import { contentCriterion } from "./stop-criteria/content-criterion";
 import { acceptableCriterion } from "./stop-criteria/acceptable-criterion";
 import { fillAll } from "./implementation-methods/fill-all";
 import { fillParent } from "./implementation-methods/fill-parent";
+import { tournamentSelect } from "./selection-methods/tournament-selection";
+import { probabilisticTournamentSelect } from "./selection-methods/probabilistic-tournament-selection";
 const d3 = require('d3');
 
 export const WARRIOR = 'warrior';
@@ -165,6 +167,12 @@ export class Configuration {
             break;
           case 'boltzmann':
             result.selectionMethods.push(boltzmannSelect);
+            break;
+          case 'tournament':
+            result.selectionMethods.push(tournamentSelect);
+            break;
+          case 'probabilisticTournament':
+            result.selectionMethods.push(probabilisticTournamentSelect);
             break;
           default:
             console.log('No selection method provided, defaulting to elite.');

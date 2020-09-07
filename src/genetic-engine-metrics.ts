@@ -6,5 +6,6 @@ export interface GeneticEngineMetrics {
   startTime: number,
   historicalMaxFitness: number[],
   generationNumber: number,
-  modeFitness: modeItem[]
+  modeFitness: modeItem[],
+  geneticDiversity: number
 }

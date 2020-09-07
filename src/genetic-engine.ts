@@ -46,7 +46,8 @@ export class GeneticEngine {
       startTime: new Date().getTime(),
       historicalMaxFitness: [this.maxFitness(population)],
       generationNumber: 1,
-      modeFitness: [this.modeFitness(population)]
+      modeFitness: [this.modeFitness(population)],
+      geneticDiversity: this.geneticDiversity(population)
     };
   }
 
@@ -158,6 +159,20 @@ export class GeneticEngine {
     modeValue.mode = highestKey;
     modeValue.percentage = highestValue / population.length;
     return modeValue;
+  }
+
+  geneticDiversity(population: Character[]): number {
+    let result: number = 0;
+    let map: Map<string, Set<Item|number>> = new Map<string, Set<Item|number>>();
+    population[0].genes.forEach((value, key) => {
+      map.set(key, new Set<Item | number>());
+    });
+    population.forEach((character)=> {
+      character.genes.forEach((value, geneName) => map.get(geneName)?.add(value));
+    })
+
+    map.forEach((value) => result += value.size);
+    return result;
   }
 
   generateCharCardHtml(character: Character): string {

@@ -164,8 +164,9 @@ export class GeneticEngine {
                       <p> <b>Weapon:</b> {{weapon}}</p>\
                       <p> <b>Boots:</b> {{boots}}</p>\
                       <p> <b>Gloves:</b> {{gloves}}</p>\
-                      <p> <b>Breastplate:</b> {{breastplate}}</p>'
-    return this.replaceValuesInStringFromMap(baseHtml, character.genes);
+                      <p> <b>Breastplate:</b> {{breastplate}}</p>\
+                      <p> <b>APTITUDE: {{aptitude}}</b></p>'
+    return this.replaceValuesInStringFromMap(baseHtml, character.genes).replace('{{aptitude}}', character.getAptitude().toString());
   }
 
   replaceValuesInStringFromMap(string: string, map: Map<any, any>){

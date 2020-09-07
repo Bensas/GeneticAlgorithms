@@ -37,6 +37,7 @@ export class Configuration {
   selectedCharacterClass: CharacterClass;
 
   populationSize: number;
+  selectQuantity: number;
 
   selectionMethods: ((population: Character[], quantity: number, geneticEngine: GeneticEngine) => Character[])[];
   selectionQuantities: number[];
@@ -98,6 +99,7 @@ export class Configuration {
   static fromConfigObject(configObj: any): Configuration {
     let result: Configuration = new Configuration()
     result.populationSize = configObj.populationSize ?? DEFAULT_POPULATION_SIZE;
+    result.selectQuantity = configObj.selectQuantity ?? 40;
     result.mutationChance = configObj.mutationChance ?? DEFAULT_MUTATION_CHANCE;
 
     switch (configObj.replace) {

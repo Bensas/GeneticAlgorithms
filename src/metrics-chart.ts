@@ -66,8 +66,6 @@ export class MetricsChart {
     this.config.data.datasets[1].data.push(metrics.averageFitness);
     this.config.data.labels.push(metrics.generationNumber);
     this.chart.update();
-    console.log(this.config.data.datasets[0].data);
-
   }
 
   

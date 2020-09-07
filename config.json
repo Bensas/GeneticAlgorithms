@@ -1,12 +1,18 @@
 {
-  "startingPopulation": 3000,
+  "populationSize": 50,
   "crossMethod": "uniform",
   "mutationMethod": "complete",
   "mutationChance": 0.5,
-  "selectionMethod": {
-    "method": "elite",
-    "quantity": 1500
-  },
+  "selectionMethods": [
+    {
+      "method": "elite",
+      "quantity": 0.4
+    },
+    {
+      "method": "elite",
+      "quantity": 0.6
+    }
+  ],
   "implementationStrategy": "fillAll",
   "stopCriterion": {
     "criterion": "time",

@@ -21,6 +21,8 @@ import { twoPointCross } from "./cross-methods/two-point-cross";
 import { enoughGenCriterion } from "./stop-criteria/enough-gen-criterion";
 import { contentCriterion } from "./stop-criteria/content-criterion";
 import { acceptableCriterion } from "./stop-criteria/acceptable-criterion";
+import { fillAll } from "./implementation-methods/fill-all";
+import { fillParent } from "./implementation-methods/fill-parent";
 const d3 = require('d3');
 
 export const WARRIOR = 'warrior';
@@ -39,7 +41,7 @@ export class Configuration {
   cross: (c1: Character, c2: Character) => Character[];
   mutate: (c: Character, mutationChance: number, geneticEngine: GeneticEngine) => Character;
   mutationChance: number;
-  replace: (population: Character[], quantity: number) => Character[];
+  replace: (population: Character[], children: Character[], quantity: number) => Character[];
 
   stopCriterion: (geneticEngine: GeneticEngine) => boolean;
   stopValue: number;//Might represent elapsed time, average fitness, etc. depending on the stop critetion
@@ -86,7 +88,18 @@ export class Configuration {
     result.startingPopulation = configObj.startingPopulation ?? DEFAULT_STARTING_POPULATION;
     result.selectQuantity = configObj.selectQuantity ?? DEFAULT_SELECT_QUANTITY;
     result.mutationChance = configObj.mutationChance ?? DEFAULT_MUTATION_CHANCE;
-    result.replace = eliteSelect;
+
+    switch (configObj.replace) {
+      case 'fillAll':
+        result.replace = fillAll;
+        break;
+      case 'fillParent':
+        result.replace = fillParent;
+        break;
+      default:
+        console.log('No replace method provided, defaulting to fillAll.');
+        result.replace = fillAll;
+    }
 
     switch (configObj.crossMethod) {
       case 'uniform':
@@ -102,7 +115,7 @@ export class Configuration {
         result.cross = twoPointCross;
         break;
       default:
-        console.log('No cross method provided, deaulting to uniform.');
+        console.log('No cross method provided, defaulting to uniform.');
         result.cross = uniformCross;
     }
 

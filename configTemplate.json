@@ -5,7 +5,7 @@
     "method": "elite", //elite | roulette | universal | boltzmann | tournamentDeterministic | tournamentProbabilistic | ranking
     "quantity": 30
   },
-  "implementationStrategy": "fillAll",
+  "implementationStrategy": "fillAll", //fillAll | fillParent
   "stopCriterion": {
     "criterion": "time", //time | generationCount | aptitude | structure | content
     "value": 60

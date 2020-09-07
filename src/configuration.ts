@@ -4,7 +4,7 @@ import { uniformCross } from "./cross-methods/uniform-cross";
 import { uniformMultiGeneMutate } from "./mutation-methods/uniform-multi-gene";
 import { eliteSelect } from "./selection-methods/elite-select";
 import { timeCriterion } from "./stop-criteria/time-criterion";
-import { DEFAULT_STARTING_POPULATION, DEFAULT_SELECT_QUANTITY, DEFAULT_MUTATION_CHANCE } from "./defaults";
+import { DEFAULT_MUTATION_CHANCE, DEFAULT_POPULATION_SIZE } from "./defaults";
 import { GeneticEngine } from "./genetic-engine";
 import { CharacterClass, Warrior, Archer, Tank, Spy } from "./character-classes/character-class";
 import { completeGenMutate } from "./mutation-methods/complete-gene";
@@ -23,6 +23,8 @@ import { contentCriterion } from "./stop-criteria/content-criterion";
 import { acceptableCriterion } from "./stop-criteria/acceptable-criterion";
 import { fillAll } from "./implementation-methods/fill-all";
 import { fillParent } from "./implementation-methods/fill-parent";
+import { tournamentSelect } from "./selection-methods/tournament-selection";
+import { probabilisticTournamentSelect } from "./selection-methods/probabilistic-tournament-selection";
 const d3 = require('d3');
 
 export const WARRIOR = 'warrior';
@@ -34,10 +36,11 @@ export class Configuration {
 
   selectedCharacterClass: CharacterClass;
 
-  startingPopulation: number;
-
-  select: (population: Character[], quantity: number, geneticEngine: GeneticEngine) => Character[];
+  populationSize: number;
   selectQuantity: number;
+
+  selectionMethods: ((population: Character[], quantity: number, geneticEngine: GeneticEngine) => Character[])[];
+  selectionQuantities: number[];
   cross: (c1: Character, c2: Character) => Character[];
   mutate: (c: Character, mutationChance: number, geneticEngine: GeneticEngine) => Character;
   mutationChance: number;
@@ -51,6 +54,16 @@ export class Configuration {
 
   constructor(){ 
     this.selectedCharacterClass = new Warrior();
+    this.selectionMethods = [];
+    this.selectionQuantities = [];
+  }
+
+  select(population: Character[], quantity: number, geneticEngine: GeneticEngine): Character[] {
+    let result: Character[] = [];
+    this.selectionMethods.forEach((method, index) => {
+      result.push(...method(population, Math.round(quantity * this.selectionQuantities[index]), geneticEngine))
+    });
+    return result;
   }
 
   selectClass(className: string){
@@ -85,8 +98,8 @@ export class Configuration {
 
   static fromConfigObject(configObj: any): Configuration {
     let result: Configuration = new Configuration()
-    result.startingPopulation = configObj.startingPopulation ?? DEFAULT_STARTING_POPULATION;
-    result.selectQuantity = configObj.selectQuantity ?? DEFAULT_SELECT_QUANTITY;
+    result.populationSize = configObj.populationSize ?? DEFAULT_POPULATION_SIZE;
+    result.selectQuantity = configObj.selectQuantity ?? 40;
     result.mutationChance = configObj.mutationChance ?? DEFAULT_MUTATION_CHANCE;
 
     switch (configObj.replace) {
@@ -139,26 +152,37 @@ export class Configuration {
         
     }
     
-    if (configObj.selectionMethod)
-      switch (configObj.selectionMethod.method) {
-        case 'elite':
-          result.select = eliteSelect;
-          break;
-        case 'ranking':
-          result.select = rankingSelect;
-          break;
-        case 'roulette':
-          result.select = rouletteSelect;
-          break;
-        case 'universal':
-          result.select = universalSelect;
-          break;
-        case 'boltzmann':
-          result.select = boltzmannSelect;
-        default:
-          console.log('No selection method provided, defaulting to elite.');
-          result.select = eliteSelect;
-      }
+    if (configObj.selectionMethods)
+      configObj.selectionMethods.forEach((element: any) => {
+        switch (element.method) {
+          case 'elite':
+            result.selectionMethods.push(eliteSelect);
+            break;
+          case 'ranking':
+            result.selectionMethods.push(rankingSelect);
+            break;
+          case 'roulette':
+            result.selectionMethods.push(rouletteSelect);
+            break;
+          case 'universal':
+            result.selectionMethods.push(universalSelect);
+            break;
+          case 'boltzmann':
+            result.selectionMethods.push(boltzmannSelect);
+            break;
+          case 'tournament':
+            result.selectionMethods.push(tournamentSelect);
+            break;
+          case 'probabilisticTournament':
+            result.selectionMethods.push(probabilisticTournamentSelect);
+            break;
+          default:
+            console.log('No selection method provided, defaulting to elite.');
+            result.selectionMethods.push(eliteSelect);
+        }
+        result.selectionQuantities.push(element.quantity)
+      });
+      
     if (configObj.stopCriterion)
       switch (configObj.stopCriterion.criterion) {
         case 'generationCount':

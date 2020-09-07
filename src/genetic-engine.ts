@@ -5,6 +5,8 @@ import { AllItems } from "./items/all-items";
 import { GeneticEngineMetrics } from "./genetic-engine-metrics";
 import { MetricsChart } from "./metrics-chart";
 import { modeItem } from "./mode-item";
+import { eliteSelect } from "./selection-methods/elite-select";
+import { rouletteSelect } from "./selection-methods/roulette-select";
 
 export class GeneticEngine {
 
@@ -15,11 +17,12 @@ export class GeneticEngine {
   constructor(public config: Configuration, private allItems: AllItems) { }
 
   startEvolution(canvas: HTMLCanvasElement, resultElem: HTMLElement){
-    let population = this.generateRandomPopulation(this.config.startingPopulation);
+    let population = this.generateRandomPopulation(this.config.populationSize);
     this.initMetrics(population);
     this.chart = new MetricsChart(canvas);
+
     const loop = setInterval(() => {
-      let parents = this.config.select(population, this.config.selectQuantity, this);
+      let parents = this.config.select(population, this.config.populationSize, this);
       let children = this.cross(parents);
       children = this.mutate(children);
       population = this.config.replace(population, children, this.config.selectQuantity);

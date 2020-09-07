@@ -1,13 +1,25 @@
 {
-  "startingPopulation": 500,
+  "populationSize": 100,
+  "selectQuantity": 40,
   "crossMethod": "anular",
   "mutationMethod": "complete",
   "mutationChance": 0.5,
+  "selectionMethods": [
+    {
+      "method": "elite",
+      "quantity": 0.4
+    },
+    {
+      "method": "elite",
+      "quantity": 0.6
+    }
+  ],
+  "implementationStrategy": "fillAll",
   "selectionMethod": {
     "method": "elite",
     "quantity": 1500
   },
-  "replace": "fillAll",
+  "replace": "fillParent",
   "stopCriterion": {
     "criterion": "generationCount",
     "value": 20,

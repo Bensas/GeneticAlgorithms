@@ -7,7 +7,7 @@
   },
   "implementationStrategy": "fillAll", //fillAll | fillParent
   "stopCriterion": {
-    "criterion": "time", //time | generationCount | aptitude | structure | content
-    "value": 60
+    "criterion": "time", //time | generationCount | acceptable | structure | content
+    "value": 20
   } // fillAll | fillParent
 }

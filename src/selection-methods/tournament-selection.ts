@@ -12,7 +12,7 @@ export function tournamentSelect(population: Character[], quantity: number): Cha
   return result;
 }
 
-function shuffle(input: any[]): any[] {
+export function shuffle(input: any[]): any[] {
   let array = input.slice();
   var currentIndex = array.length, temporaryValue, randomIndex;
 

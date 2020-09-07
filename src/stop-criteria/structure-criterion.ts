@@ -8,9 +8,6 @@ export function structureCriterion(geneticEngine: GeneticEngine): boolean {
     }
     let pos: number = geneticEngine.metrics.modeFitness.length - geneticEngine.config.numberOfGenerations;
     let arr: modeItem[] = geneticEngine.metrics.modeFitness.slice(pos);
-    console.log('aca ta: ');
-    console.log(arr);
-    console.log(geneticEngine.metrics.modeFitness);
     for(let i = 1; i < geneticEngine.config.numberOfGenerations; i++){
         if(arr[0].mode !== arr[i].mode || arr[0].percentage < geneticEngine.config.stopValue || arr[i].percentage < geneticEngine.config.stopValue){
             return false;

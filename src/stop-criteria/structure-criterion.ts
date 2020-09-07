@@ -6,7 +6,12 @@ export function structureCriterion(geneticEngine: GeneticEngine): boolean {
     if(geneticEngine.metrics.modeFitness.length < geneticEngine.config.numberOfGenerations){
         return false;
     }
-    let pos: number = geneticEngine.metrics.modeFitness.length - Math.floor(geneticEngine.config.stopValue * geneticEngine.metrics.modeFitness.length);
-    let arr: modeItem[] = geneticEngine.metrics.modeFitness.slice();
+    let pos: number = geneticEngine.metrics.modeFitness.length - geneticEngine.config.numberOfGenerations;
+    let arr: modeItem[] = geneticEngine.metrics.modeFitness.slice(pos, geneticEngine.config.numberOfGenerations);
+    for(let i = 1; i < geneticEngine.config.numberOfGenerations; i++){
+        if(arr[0].mode !== arr[i].mode || arr[0].percentage < geneticEngine.config.stopValue || arr[i].percentage < geneticEngine.config.stopValue){
+            return false;
+        }
+    }
   return true;
 }

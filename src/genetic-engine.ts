@@ -32,7 +32,7 @@ export class GeneticEngine {
         resultElem.innerHTML = this.generateCharCardHtml(population[0]);
         resultElem.style.display = 'block';
       }
-    }, 100);
+    }, 400);
   }
 
   initMetrics(population: Character[]): void {

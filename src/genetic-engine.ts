@@ -27,6 +27,7 @@ export class GeneticEngine {
       this.chart.updateChart(this.metrics);
       console.log('Average fitness: ' + this.metrics.averageFitness);
       // console.log('Min fitness: ' + this.metrics.minFitness);
+      console.log('Num of Gen: ' + this.metrics.generationNumber + ' / ' + this.config.stopValue)
       if (this.config.stopCriterion(this)){
         clearInterval(loop);
         resultElem.innerHTML = this.generateCharCardHtml(population[0]);
@@ -41,7 +42,7 @@ export class GeneticEngine {
       minFitness: this.minFitness(population),
       startTime: new Date().getTime(),
       historicalMaxFitness: [this.maxFitness(population)],
-      generationNumber: 0,
+      generationNumber: 1,
       modeFitness: [this.modeFitness(population)]
     };
   }

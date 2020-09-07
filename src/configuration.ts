@@ -161,7 +161,7 @@ export class Configuration {
       }
     if (configObj.stopCriterion)
       switch (configObj.stopCriterion.criterion) {
-        case 'amount':
+        case 'generationCount':
           result.stopCriterion = enoughGenCriterion;
           result.stopValue = configObj.stopCriterion.value;
           break;

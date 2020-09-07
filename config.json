@@ -1,6 +1,6 @@
 {
   "startingPopulation": 500,
-  "crossMethod": "uniform",
+  "crossMethod": "anular",
   "mutationMethod": "complete",
   "mutationChance": 0.5,
   "selectionMethods": [
@@ -14,6 +14,11 @@
     }
   ],
   "implementationStrategy": "fillAll",
+  "selectionMethod": {
+    "method": "elite",
+    "quantity": 1500
+  },
+  "replace": "fillAll",
   "stopCriterion": {
     "criterion": "generationCount",
     "value": 20,

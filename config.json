@@ -1,5 +1,5 @@
 {
-  "populationSize": 50,
+  "startingPopulation": 500,
   "crossMethod": "uniform",
   "mutationMethod": "complete",
   "mutationChance": 0.5,
@@ -15,8 +15,8 @@
   ],
   "implementationStrategy": "fillAll",
   "stopCriterion": {
-    "criterion": "time",
-    "value": 10,
+    "criterion": "generationCount",
+    "value": 20,
     "numberOfGenerations": 30
   }
 }

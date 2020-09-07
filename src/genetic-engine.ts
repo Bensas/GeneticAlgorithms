@@ -25,11 +25,12 @@ export class GeneticEngine {
       let parents = this.config.select(population, this.config.populationSize, this);
       let children = this.cross(parents);
       children = this.mutate(children);
-      population = this.config.replace(population.concat(children), this.config.populationSize);
-
+      population = this.config.replace(population, children, this.config.selectQuantity);
       this.calculateMetrics(population);
       this.chart.updateChart(this.metrics);
-
+      console.log('Average fitness: ' + this.metrics.averageFitness);
+      // console.log('Min fitness: ' + this.metrics.minFitness);
+      console.log('Num of Gen: ' + this.metrics.generationNumber + ' / ' + this.config.stopValue)
       if (this.config.stopCriterion(this)){
         clearInterval(loop);
         resultElem.innerHTML = this.generateCharCardHtml(population[0]);
@@ -44,7 +45,7 @@ export class GeneticEngine {
       minFitness: this.minFitness(population),
       startTime: new Date().getTime(),
       historicalMaxFitness: [this.maxFitness(population)],
-      generationNumber: 0,
+      generationNumber: 1,
       modeFitness: [this.modeFitness(population)]
     };
   }

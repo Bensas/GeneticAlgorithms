@@ -136,7 +136,20 @@ export class GeneticEngine {
   
   modeFitness(population: Character[]): modeItem {
     let modeValue: modeItem = {mode: 0, percentage: 0};
-    // formula para calcular la moda y el porcentaje de personas q tienen ese fitness;
+    let map: Map<number, number> = new Map();
+    let highestKey: number = 0;
+    let highestValue: number = 0;
+    population.forEach((element) => {
+      let current: number = element.getAptitude();
+      map.set(current, (map.get(current) ?? 0) + 1);
+      let temp: number = map.get(current) ?? 0;
+      if(highestValue < temp){
+        highestValue = temp;
+        highestKey = current;
+      }
+    });
+    modeValue.mode = highestKey;
+    modeValue.percentage = highestValue / population.length;
     return modeValue;
   }
 }

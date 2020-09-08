@@ -4,7 +4,7 @@ import { Warrior } from "../character-classes/character-class";
 
 var assert = require('assert');
 describe('Elite Selection', function () {
-  describe('select()', function () {
+  describe('eliteSelect()', function () {
     it('Should return the top 5 elements', function () {
       let population: Character[] = [];
       for (let i = 1; i <= 10; i++){

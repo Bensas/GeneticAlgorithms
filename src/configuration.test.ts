@@ -8,7 +8,7 @@ import { Warrior } from "./character-classes/character-class";
 
 var assert = require('assert');
 describe('Configuration', function () {
-  describe('select()', function () {
+  describe('configuration()', function () {
     it('Should return the correct number of elements', function () {
       let population: Character[] = [];
       for (let i = 1; i <= 10; i++){

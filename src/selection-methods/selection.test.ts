@@ -30,7 +30,6 @@ describe('All Selection Methods', function () {
       assert(rouletteSelect(population, 8).length === 8);
       assert(rouletteSelect(population, 12).length === 12);
       assert(universalSelect(population, 8).length === 8);
-      // universalSelect(population, 12).length);
       assert(universalSelect(population, 12).length === 12);
       assert(boltzmannSelect(population, 8, mockGeneticEngine).length === 8);
       assert(boltzmannSelect(population, 12, mockGeneticEngine).length === 12);

@@ -11,7 +11,7 @@ export function getBoltzmannAptitudePopulation(population: Character[], temperat
   const totalBoltzmann = population.reduce((accum, character) => accum + Math.pow(Math.E, (character.getAptitude() / temperature)), 0);
   return population.map((character, index) => {
                       const actualAptitude = character.getAptitude();
-                      character.getAptitude = () => Math.pow(Math.E, (actualAptitude / temperature) / totalBoltzmann);
+                      character.getAptitude = () => Math.pow(Math.E, (actualAptitude / temperature)) / totalBoltzmann;
                       return character;
                     });
 }

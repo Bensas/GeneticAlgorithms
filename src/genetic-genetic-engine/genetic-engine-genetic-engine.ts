@@ -81,30 +81,31 @@ export class GeneticEngineGeneticEngine {
   }
 
   generateAllConfigs(): Configuration[] {
-    let result:Configuration[] = [];
-    CROSS_METHODS.forEach((cross) => {
-      IMPLEMENTATION_METHODS.forEach((implement) => {
-        MUTATION_METHODS.forEach((mutate) => {
-          SELECTION_METHODS.forEach((select) => {
-            let config = new Configuration();
-            config.cross = cross;
-            config.replace = implement;
-            config.mutate = mutate;
-            config.selectedCharacterClass = new Archer();
-            config.selectionMethods[0] = select;
-            config.selectionMethods[1] = select;
-            config.selectionQuantities[0] = 1;
-            config.selectionQuantities[1] = 0;
-            config.populationSize = POPULATION_SIZE;
-            config.selectQuantity = SELECT_QUANTITY;
-            config.mutationChance = 0.6;
-            config.stopCriterion = STOP_CRITERION;
-            config.stopValue = STOP_VALUE;
-            result.push(config);
-          });
-        });
-      });
-    });
-    return result;
+    return [new Configuration()];
+    // let result:Configuration[] = [];
+    // CROSS_METHODS.forEach((cross) => {
+    //   IMPLEMENTATION_METHODS.forEach((implement) => {
+    //     MUTATION_METHODS.forEach((mutate) => {
+    //       SELECTION_METHODS.forEach((select) => {
+    //         let config = new Configuration();
+    //         config.cross = cross;
+    //         config.replace = implement;
+    //         config.mutate = mutate;
+    //         config.selectedCharacterClass = new Archer();
+    //         config.selectionMethods[0] = select;
+    //         config.selectionMethods[1] = select;
+    //         config.selectionQuantities[0] = 1;
+    //         config.selectionQuantities[1] = 0;
+    //         config.populationSize = POPULATION_SIZE;
+    //         config.selectQuantity = SELECT_QUANTITY;
+    //         config.mutationChance = 0.6;
+    //         config.stopCriterion = STOP_CRITERION;
+    //         config.stopValue = STOP_VALUE;
+    //         result.push(config);
+    //       });
+    //     });
+    //   });
+    // });
+    // return result;
   }
 }

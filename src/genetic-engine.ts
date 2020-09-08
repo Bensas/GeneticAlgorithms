@@ -25,7 +25,7 @@ export class GeneticEngine {
       let parents = this.config.select(population, this.config.populationSize, this);
       let children = this.cross(parents);
       children = this.mutate(children);
-      population = this.config.replace(population, children, this.config.selectQuantity);
+      population = this.config.replace(population, children, this.config.selectQuantity, this.config, this);
       this.calculateMetrics(population);
       this.chart.updateChart(this.metrics);
       console.log('Average fitness: ' + this.metrics.averageFitness);
@@ -47,7 +47,7 @@ export class GeneticEngine {
       let parents = this.config.select(population, this.config.populationSize, this);
       let children = this.cross(parents);
       children = this.mutate(children);
-      population = this.config.replace(population, children, this.config.selectQuantity);
+      population = this.config.replace(population, children, this.config.selectQuantity, this.config, this);
       this.calculateMetrics(population);
     }
     console.log(this.metrics.historicalMaxFitness[this.metrics.historicalMaxFitness.length-1]);

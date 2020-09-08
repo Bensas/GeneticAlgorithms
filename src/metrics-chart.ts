@@ -6,7 +6,7 @@ const INITIAL_CONFIG = {
   data: {
     labels: [],
     datasets: [{
-      label: 'Min Fitness',
+      label: 'Max Fitness',
       backgroundColor: 'rgb(255, 99, 132)', //Red
       borderColor: 'rgb(255, 99, 132)', //Red
       data: [],
@@ -114,7 +114,7 @@ export class MetricsChart {
   }
 
   public updateChart(metrics: GeneticEngineMetrics) {
-    this.config.data.datasets[0].data.push(metrics.minFitness);
+    this.config.data.datasets[0].data.push(metrics.historicalMaxFitness[metrics.historicalMaxFitness.length-1]);
     this.config.data.datasets[1].data.push(metrics.averageFitness);
     this.config.data.labels.push(metrics.generationNumber);
     this.chart.update();

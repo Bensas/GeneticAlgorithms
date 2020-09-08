@@ -44,7 +44,9 @@ export class Configuration {
   cross: (c1: Character, c2: Character) => Character[];
   mutate: (c: Character, mutationChance: number, geneticEngine: GeneticEngine) => Character;
   mutationChance: number;
-  replace: (population: Character[], children: Character[], quantity: number) => Character[];
+  replace: (population: Character[], children: Character[], quantity: number, config: Configuration, geneticEngine: GeneticEngine) => Character[];
+  replacementMethods: ((population: Character[], quantity: number, geneticEngine: GeneticEngine) => Character[])[];
+  replacementQuantities: number[];
 
   stopCriterion: (geneticEngine: GeneticEngine) => boolean;
   stopValue: number;//Might represent elapsed time, average fitness, etc. depending on the stop critetion
@@ -56,7 +58,10 @@ export class Configuration {
     this.selectedCharacterClass = new Warrior();
     this.selectionMethods = [];
     this.selectionQuantities = [];
+    this.replacementMethods = [];
+    this.replacementQuantities = [];
   }
+
 
   select(population: Character[], quantity: number, geneticEngine: GeneticEngine): Character[] {
     let result: Character[] = [];
@@ -65,6 +70,8 @@ export class Configuration {
     });
     return result;
   }
+
+
 
   selectClass(className: string){
     switch (className){
@@ -182,6 +189,39 @@ export class Configuration {
         }
         result.selectionQuantities.push(element.quantity)
       });
+    
+    if (configObj.replacementMethods) {
+      configObj.replacementMethods.forEach((element: any) => {
+        switch (element.method) {
+          case 'elite':
+            result.replacementMethods.push(eliteSelect);
+            break;
+          case 'ranking':
+            result.replacementMethods.push(rankingSelect);
+            break;
+          case 'roulette':
+            result.replacementMethods.push(rouletteSelect);
+            break;
+          case 'universal':
+            result.replacementMethods.push(universalSelect);
+            break;
+          case 'boltzmann':
+            result.replacementMethods.push(boltzmannSelect);
+            break;
+          case 'tournament':
+            result.replacementMethods.push(tournamentSelect);
+            break;
+          case 'probabilisticTournament':
+            result.replacementMethods.push(probabilisticTournamentSelect);
+            break;
+          default:
+            console.log('No replacement method provided, defaulting to elite.');
+            result.replacementMethods.push(eliteSelect);
+        }
+        result.replacementQuantities.push(element.quantity)
+      });
+
+    }
       
     if (configObj.stopCriterion)
       switch (configObj.stopCriterion.criterion) {

@@ -1,23 +1,33 @@
 {
-  "populationSize": 100,
-  "selectQuantity": 40,
-  "crossMethod": "uniformCross",
-  "mutationMethod": "complete",
-  "mutationChance": 0.6,
+  "populationSize": 300,
+  "selectQuantity": 50,
+  "crossMethod": "uniform",
+  "mutationMethod": "uniformMultiGene",
+  "mutationChance": 0.1,
   "selectionMethods": [
     {
-      "method": "probabilisticTournament",
-      "quantity": 0
+      "method": "elite",
+      "quantity": 0.3
     },
     {
-      "method": "probabilisticTournament",
-      "quantity": 1
+      "method": "roulette",
+      "quantity": 0.7
     }
   ],
   "replace": "fillParent",
+  "replacementMethods": [
+    {
+      "method": "elite",
+      "quantity": 0.3
+    },
+    {
+      "method": "roulette",
+      "quantity": 0.7
+    }
+  ],
   "stopCriterion": {
     "criterion": "generationCount",
-    "value": 10,
-    "numberOfGenerations": 400
+    "value": 500,
+    "numberOfGenerations": 500
   }
 }

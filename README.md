@@ -2,7 +2,7 @@
 
 Website containing a genetic algorithm engine that can work with different selection, mutation, and cross methods, as well as multiple stop criteria.
 
-The point of the engine is to select the best equipment/height setup for a RPG character.
+The point of the engine is to select the best equipment/height setup for an RPG character.
 
 ## Demo website
 

@@ -19,4 +19,18 @@ describe('Elite Selection', function () {
       assert(newPop[4].getAptitude() === 6);
     });
   });
+  describe('select1elem()', function () {
+    it('Should return the top 5 elements', function () {
+      let population: Character[] = [];
+      for (let i = 1; i <= 10; i++){
+        let newChar = new Character(new Warrior());
+        newChar.getAptitude = () => i;
+        population.push(newChar);
+      }
+      // Aptitudes will be as follows[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+      const newPop = eliteSelect(population, 1);
+      assert(newPop.length === 1);
+      assert(newPop[0].getAptitude() === 10);
+    });
+  });
 });

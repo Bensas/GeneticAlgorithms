@@ -6,11 +6,11 @@
   "mutationChance": 0.6,
   "selectionMethods": [
     {
-      "method": "roulette",
+      "method": "probabilisticTournament",
       "quantity": 0
     },
     {
-      "method": "ranking",
+      "method": "probabilisticTournament",
       "quantity": 1
     }
   ],
@@ -18,6 +18,6 @@
   "stopCriterion": {
     "criterion": "generationCount",
     "value": 10,
-    "numberOfGenerations": 30
+    "numberOfGenerations": 400
   }
 }

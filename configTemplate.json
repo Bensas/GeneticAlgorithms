@@ -1,13 +1,23 @@
 {
+  "populationSize": 100,
+  "selectQuantity": 40,
   "crossMethod": "uniform", //onePoint | twoPoint | anular | uniform
-  "mutationMethod": "uniformMultiGene",//gene | limitedMultiGene | uniformMultiGene | complete
-  "selectionMethod": {
-    "method": "elite", //elite | roulette | universal | boltzmann | tournamentDeterministic | tournamentProbabilistic | ranking
-    "quantity": 30
-  },
-  "implementationStrategy": "fillAll", //fillAll | fillParent
+  "mutationMethod": "complete", //oneGene | limitedMultiGene | uniformMultiGene | complete
+  "mutationChance": 0.6,
+  "selectionMethods": [
+    {
+      "method": "probabilisticTournament", //elite | roulette | universal | boltzmann | tournament | probabilisticTournament | ranking
+      "quantity": 0.5
+    },
+    {
+      "method": "elite",
+      "quantity": 0.5
+    }
+  ],
+  "replace": "fillParent", //fillAll | fillParent
   "stopCriterion": {
-    "criterion": "time", //time | generationCount | acceptable | structure | content
-    "value": 20
-  } // fillAll | fillParent
+    "criterion": "generationCount", //time | generationCount | acceptable | structure | content
+    "value": 10,
+    "numberOfGenerations": 400
+  }
 }

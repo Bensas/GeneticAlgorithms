@@ -3,22 +3,17 @@
   "selectQuantity": 40,
   "crossMethod": "anular",
   "mutationMethod": "complete",
-  "mutationChance": 0.5,
+  "mutationChance": 0.6,
   "selectionMethods": [
     {
       "method": "elite",
-      "quantity": 0.4
+      "quantity": 0.6
     },
     {
-      "method": "elite",
-      "quantity": 0.6
+      "method": "roulette",
+      "quantity": 0.4
     }
   ],
-  "implementationStrategy": "fillAll",
-  "selectionMethod": {
-    "method": "elite",
-    "quantity": 1500
-  },
   "replace": "fillParent",
   "stopCriterion": {
     "criterion": "generationCount",

@@ -11,6 +11,8 @@ window.onload = () => {
   let selectClassText = document.getElementById('select-class-text');
   let startButton = document.getElementById('start-button');
   let loadingMessage = document.getElementById('loading-message');
+  let loader = document.getElementById('loader');
+  let speedSlider = document.getElementById('speed-slider');
   let metricsCanvas = document.getElementById('metrics-canvas');
   let characterCard = document.getElementById('character-card');
   
@@ -26,22 +28,39 @@ window.onload = () => {
         if (selectClassText) selectClassText.style.display = 'none';
         if (startButton) startButton.style.display = 'none';
         const allItems: AllItems = { helmets: [], weapons: [], boots: [], gloves: [], breastplates: []};
+
+        if (loader) loader.style.display = 'flex';
         if (loadingMessage) loadingMessage.innerHTML = 'Loading weapons...';
-        await ItemLoader.loadItemsFromTsv('armasReduced.tsv', allItems.weapons);
+        await ItemLoader.loadItemsFromTsv('armas.tsv', allItems.weapons);
         if (loadingMessage) loadingMessage.innerHTML = 'Loading boots...';
-        await ItemLoader.loadItemsFromTsv('botasReduced.tsv', allItems.boots);
+        await ItemLoader.loadItemsFromTsv('botas.tsv', allItems.boots);
         if (loadingMessage) loadingMessage.innerHTML = 'Loading helmets...';
-        await ItemLoader.loadItemsFromTsv('cascosReduced.tsv', allItems.helmets);
+        await ItemLoader.loadItemsFromTsv('cascos.tsv', allItems.helmets);
         if (loadingMessage) loadingMessage.innerHTML = 'Loading gloves...';
-        await ItemLoader.loadItemsFromTsv('guantesReduced.tsv', allItems.gloves);
+        await ItemLoader.loadItemsFromTsv('guantes.tsv', allItems.gloves);
         if (loadingMessage) loadingMessage.innerHTML = 'Loading breastplates...';
-        await ItemLoader.loadItemsFromTsv('pecherasReduced.tsv', allItems.breastplates);
+        await ItemLoader.loadItemsFromTsv('pecheras.tsv', allItems.breastplates);
         
         if (loadingMessage) loadingMessage.innerHTML = 'All Items loaded :)';
+
+        if (loadingMessage) loadingMessage.innerHTML = printConfig(config);
+        if (loader) loader.style.display = 'none';
         
         const geneticEngine = new GeneticEngine(config, allItems);
-        geneticEngine.startEvolution(<HTMLCanvasElement>metricsCanvas, <HTMLElement>characterCard);
+        geneticEngine.startEvolution(<HTMLCanvasElement>metricsCanvas, <HTMLElement>characterCard, <HTMLElement>speedSlider);
       }
     };
   }
+}
+
+function printConfig(config: Configuration): string{
+  let result: string = 'Population Size:' + config.populationSize + ' | ';
+  result += 'Select quantity: ' + config.selectQuantity + ' | ';
+  result += 'Mutation method: ' + config.mutate.name + ' | ';
+  result += 'Selection methods: ' + config.selectionMethods[0].name + '(' + config.selectionQuantities[0] + ')' + ' and ' +
+                                    config.selectionMethods[1].name + '(' + config.selectionQuantities[1] + ')' + ' | ';
+  result += 'Select quantity: ' + config.selectQuantity + ' | ';
+  result += 'Implementation strategy: ' + config.replace.name + ' | ';
+  result += 'Stop criterion: ' + config.stopCriterion.name + ' (' + config.stopValue + ')';
+  return result;
 }

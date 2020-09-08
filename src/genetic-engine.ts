@@ -16,7 +16,7 @@ export class GeneticEngine {
 
   constructor(public config: Configuration, private allItems: AllItems) { }
 
-  startEvolution(canvas: HTMLCanvasElement, resultElem: HTMLElement){
+  startEvolution(canvas: HTMLCanvasElement, resultElem: HTMLElement, speedSLider: any){
     let population = this.generateRandomPopulation(this.config.populationSize);
     this.initMetrics(population);
     this.chart = new MetricsChart(canvas);
@@ -36,7 +36,11 @@ export class GeneticEngine {
         resultElem.innerHTML = this.generateCharCardHtml(population[0]);
         resultElem.style.display = 'block';
       }
-    }, 400);
+    }, this.getFrequency(speedSLider.value));
+  }
+
+  getFrequency(value: number): number{
+    return 1000 - value*10;
   }
 
   initMetrics(population: Character[]): void {

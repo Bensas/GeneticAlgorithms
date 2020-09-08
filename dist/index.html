@@ -26,9 +26,12 @@
           <option value="spy">Spy</option>
         </select>
       </p>
+      <p>Simulation speed:</p>  
+      <span>Slow</span><input id="speed-slider" type="range" min="0" max="99" value="50" class="slider"><span>Fast</span><br>
       <button id="start-button">Start!</button>
     </div>
     <p id="loading-message"></p>
+    
     <div style="height: 90vh; width: 90%">
       <canvas id="metrics-canvas"></canvas>
       <canvas id="genetic-diversity-canvas"></canvas>

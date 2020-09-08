@@ -6,7 +6,7 @@ const INITIAL_CONFIG = {
   data: {
     labels: [],
     datasets: [{
-      label: 'Max Fitness',
+      label: 'Min Fitness',
       backgroundColor: 'rgb(255, 99, 132)', //Red
       borderColor: 'rgb(255, 99, 132)', //Red
       data: [],
@@ -16,6 +16,12 @@ const INITIAL_CONFIG = {
       fill: false,
       backgroundColor: 'rgb(54, 162, 235)', //Blue
       borderColor: 'rgb(54, 162, 235)', //Blue
+      data: [],
+    }, {
+      label: 'Max Fitness',
+      fill: false,
+      backgroundColor: '#80FF95', //Green
+      borderColor: '#80FF95', //Green
       data: [],
     }]
   },
@@ -59,8 +65,8 @@ const INITIAL_CONFIG_2 = {
     labels: [],
     datasets: [{
       label: 'Genetic Diversity',
-      backgroundColor: '#80FF95', //Green
-      borderColor: '#80FF95', //Green
+      backgroundColor: '#fdfb6e', //Yellow
+      borderColor: '#fdfb6e', //Yellow
       data: [],
       fill: false,
     }]
@@ -114,8 +120,9 @@ export class MetricsChart {
   }
 
   public updateChart(metrics: GeneticEngineMetrics) {
-    this.config.data.datasets[0].data.push(metrics.historicalMaxFitness[metrics.historicalMaxFitness.length-1]);
+    this.config.data.datasets[0].data.push(metrics.minFitness);
     this.config.data.datasets[1].data.push(metrics.averageFitness);
+    this.config.data.datasets[2].data.push(metrics.historicalMaxFitness[metrics.historicalMaxFitness.length-1]);
     this.config.data.labels.push(metrics.generationNumber);
     this.chart.update();
 

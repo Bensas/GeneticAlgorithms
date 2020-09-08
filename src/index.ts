@@ -3,6 +3,7 @@ import { AllItems } from './items/all-items';
 import { Configuration } from './configuration';
 import { GeneticEngine } from './genetic-engine';
 import { Character } from './character';
+import { GeneticEngineGeneticEngine } from './genetic-genetic-engine/genetic-engine-genetic-engine';
 
 window.onload = () => {
   let configUploadertext = document.getElementById('config-uploader-text');
@@ -45,6 +46,10 @@ window.onload = () => {
 
         if (loadingMessage) loadingMessage.innerHTML = printConfig(config);
         if (loader) loader.style.display = 'none';
+        // const genEnGenEn: GeneticEngineGeneticEngine = new GeneticEngineGeneticEngine();
+        // for (let i = 0; i < 10; i++){
+        //  const conf: Configuration = genEnGenEn.findBestConfig(allItems);
+        // }
         
         const geneticEngine = new GeneticEngine(config, allItems);
         geneticEngine.startEvolution(<HTMLCanvasElement>metricsCanvas, <HTMLElement>characterCard, <HTMLElement>speedSlider);
@@ -59,7 +64,7 @@ function printConfig(config: Configuration): string{
   result += 'Mutation method: ' + config.mutate.name + ' | ';
   result += 'Selection methods: ' + config.selectionMethods[0].name + '(' + config.selectionQuantities[0] + ')' + ' and ' +
                                     config.selectionMethods[1].name + '(' + config.selectionQuantities[1] + ')' + ' | ';
-  result += 'Select quantity: ' + config.selectQuantity + ' | ';
+  result += 'Cross method: ' + config.cross.name + ' | ';
   result += 'Implementation strategy: ' + config.replace.name + ' | ';
   result += 'Stop criterion: ' + config.stopCriterion.name + ' (' + config.stopValue + ')';
   return result;

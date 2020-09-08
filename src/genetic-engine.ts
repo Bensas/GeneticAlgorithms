@@ -39,6 +39,21 @@ export class GeneticEngine {
     }, this.getFrequency(speedSLider.value));
   }
 
+  quickEvolution(config: Configuration): Character[]{
+    this.config = config;
+    let population = this.generateRandomPopulation(this.config.populationSize);
+    this.initMetrics(population);
+    while (this.config.stopCriterion(this)){
+      let parents = this.config.select(population, this.config.populationSize, this);
+      let children = this.cross(parents);
+      children = this.mutate(children);
+      population = this.config.replace(population, children, this.config.selectQuantity);
+      this.calculateMetrics(population);
+    }
+    console.log(this.metrics.historicalMaxFitness[this.metrics.historicalMaxFitness.length-1]);
+    return population;
+  }
+
   getFrequency(value: number): number{
     return 1000 - value*10;
   }

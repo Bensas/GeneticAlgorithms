@@ -4,6 +4,10 @@ Website containing a genetic algorithm engine that can work with different selec
 
 The point of the engine is to select the best equipment/height setup for a RPG character.
 
+## Demo website
+
+A version of the website can also be found at https://bensas.github.io/genetic_algorithms/
+
 ## Building/running the site
 
 **Requirements:**
@@ -27,7 +31,3 @@ The website can be found in http://localhost:8080/dist/ :)
 
 1) Run ```npm test```
 2) Have a hot chocolate :) 
-
-## Demo website
-
-A version of the website can also be found at https://bensas.github.io/genetic_algorithms/

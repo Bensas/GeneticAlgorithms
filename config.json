@@ -1,23 +1,23 @@
 {
   "populationSize": 100,
   "selectQuantity": 40,
-  "crossMethod": "anular",
+  "crossMethod": "uniformCross",
   "mutationMethod": "complete",
   "mutationChance": 0.6,
   "selectionMethods": [
     {
-      "method": "elite",
-      "quantity": 0.6
+      "method": "roulette",
+      "quantity": 0
     },
     {
-      "method": "roulette",
-      "quantity": 0.4
+      "method": "ranking",
+      "quantity": 1
     }
   ],
   "replace": "fillParent",
   "stopCriterion": {
     "criterion": "generationCount",
-    "value": 200,
+    "value": 10,
     "numberOfGenerations": 30
   }
 }

@@ -57,6 +57,8 @@ export class GeneticEngine {
     this.metrics.historicalMaxFitness.push(this.maxFitness(population));
     this.metrics.generationNumber++;
     this.metrics.modeFitness.push(this.modeFitness(population));
+    this.metrics.geneticDiversity = this.geneticDiversity(population)
+
   }
 
   generateRandomPopulation(startingPopulation: number): Character[]{

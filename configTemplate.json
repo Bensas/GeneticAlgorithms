@@ -1,7 +1,7 @@
 {
   "populationSize": 100,
   "selectQuantity": 40,
-  "crossMethod": "uniform", //onePoint | twoPoint | anular | uniform
+  "crossMethod": "onePoint", //onePoint | twoPoint | anular | uniform
   "mutationMethod": "complete", //oneGene | limitedMultiGene | uniformMultiGene | complete
   "mutationChance": 0.6,
   "selectionMethods": [
@@ -15,6 +15,16 @@
     }
   ],
   "replace": "fillParent", //fillAll | fillParent
+  "replacementMethods": [
+    {
+      "method": "elite", //elite | roulette | universal | boltzmann | tournament | probabilisticTournament | ranking
+      "quantity": 0.3
+    },
+    {
+      "method": "roulette",
+      "quantity": 0.7
+    }
+  ],
   "stopCriterion": {
     "criterion": "generationCount", //time | generationCount | acceptable | structure | content
     "value": 10,

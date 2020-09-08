@@ -6,7 +6,7 @@ The point of the engine is to select the best equipment/height setup for a RPG c
 
 ## Demo website
 
-A version of the website can also be found at https://bensas.github.io/genetic_algorithms/
+A hosted version of the website can be found at https://bensas.github.io/genetic_algorithms/
 
 ## Building/running the site
 
